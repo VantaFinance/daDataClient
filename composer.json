@@ -1,11 +1,20 @@
 {
     "name": "vanta/dadata",
-    "description": "Clear client DaData",
+    "description": "Pure client DaData",
+    "license": "MIT",
     "authors": [
         {
             "name": "Vlad Shashkov",
             "email": "v.shashkov@pos-credit.ru"
+        },
+        {
+            "name": "Vanta Team",
+            "email": "info@vanta.ru"
         }
+    ],
+    "keywords": [
+        "dadata",
+        "suggestions"
     ],
     "autoload": {
         "psr-4": {
@@ -30,13 +39,12 @@
         "myclabs/php-enum": "^1.0"
     },
     "suggest": {
-        "guzzlehttp/guzzle": "Http client",
-        "symfony/http-client": "Http client"
+        "psr/http-client-implementation": "Psr http client implementation"
     },
     "require-dev": {
-        "symfony/var-dumper": "^5.3",
+        "symfony/var-dumper": "^5.4|^6.0",
         "friendsofphp/php-cs-fixer": "^3.17",
-        "vimeo/psalm": "^5.11",
+        "vimeo/psalm": "^5.12",
         "psalm/plugin-symfony": "^5.0",
         "guzzlehttp/guzzle": "^7.7",
         "symfony/http-client": "5.4|^6.0"

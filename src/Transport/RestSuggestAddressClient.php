@@ -17,6 +17,7 @@ use Symfony\Component\Serializer\Normalizer\UnwrappingDenormalizer;
 use Symfony\Component\Serializer\SerializerInterface as Serializer;
 use Vanta\Integration\DaData\Response\SuggestAddress;
 use Vanta\Integration\DaData\SuggestAddressClient;
+use Yiisoft\Http\Method;
 
 final class RestSuggestAddressClient implements SuggestAddressClient
 {
@@ -31,14 +32,14 @@ final class RestSuggestAddressClient implements SuggestAddressClient
     }
 
     /**
-     * @psalm-suppress MixedInferredReturnType,MixedReturnStatement
+     * @psalm-suppress MixedInferredReturnType,MixedReturnStatement, MixedArgumentTypeCoercion ,MixedArrayOffset, UndefinedConstant,
      *
      * @throws ClientExceptionInterface
      */
     public function findByText(string $query, int $count = 1): array
     {
         $request = new Request(
-            'POST',
+            Method::POST,
             '/suggestions/api/4_1/rs/suggest/address',
             [],
             $this->serializer->serialize(['query' => $query, 'count' => $count], 'json')

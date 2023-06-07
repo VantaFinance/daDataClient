@@ -52,6 +52,8 @@ function parsePackageVersion(string $version): Version
 }
 
 /**
+ * @psalm-immutable
+ *
  * @internal
  */
 final class Version

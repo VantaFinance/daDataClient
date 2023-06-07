@@ -80,6 +80,8 @@ final class RestClientBuilder
     }
 
     /**
+     * @psalm-suppress MixedArgumentTypeCoercion,TooManyArguments, UndefinedClass, MissingDependency, InvalidArgument
+     *
      * @param non-empty-string|null $apiKey
      * @param non-empty-string|null $secret
      */
