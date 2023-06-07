@@ -16,7 +16,7 @@ use MyCLabs\Enum\Enum;
 /**
  * @psalm-immutable
  *
- * @extends Enum<non-empty-string>
+ * @extends Enum<numeric-string>
  */
 final class QcGeo extends Enum
 {
