@@ -53,7 +53,7 @@ final class RestClientBuilder
     /**
      * @var non-empty-string|null
      */
-    private ?string $secret;
+    private ?string $secretKey;
 
     /**
      * @var non-empty-array<int, Middleware>
@@ -62,15 +62,15 @@ final class RestClientBuilder
 
     /**
      * @param array<int, Middleware> $middlewares
-     * @param non-empty-string|null  $token
-     * @param non-empty-string|null  $secret
+     * @param non-empty-string|null  $apiKey
+     * @param non-empty-string|null  $secretKey
      */
-    private function __construct(PsrHttpClient $client, Serializer $serializer, ?string $token, ?string $secret, array $middlewares = [])
+    private function __construct(PsrHttpClient $client, Serializer $serializer, ?string $apiKey, ?string $secretKey, array $middlewares = [])
     {
         $this->client      = $client;
         $this->serializer  = $serializer;
-        $this->apiKey      = $token;
-        $this->secret      = $secret;
+        $this->apiKey      = $apiKey;
+        $this->secretKey      = $secretKey;
         $this->middlewares = array_merge($middlewares, [
             new AuthorizationMiddleware(),
             new UrlMiddleware(),
@@ -83,9 +83,9 @@ final class RestClientBuilder
      * @psalm-suppress MixedArgumentTypeCoercion,TooManyArguments, UndefinedClass, MissingDependency, InvalidArgument
      *
      * @param non-empty-string|null $apiKey
-     * @param non-empty-string|null $secret
+     * @param non-empty-string|null $secretKey
      */
-    public static function create(PsrHttpClient $client, string $apiKey = null, string $secret = null): self
+    public static function create(PsrHttpClient $client, string $apiKey = null, string $secretKey = null): self
     {
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
 
@@ -112,7 +112,7 @@ final class RestClientBuilder
             new ArrayDenormalizer(),
         ], [new JsonEncoder()]);
 
-        return new self($client, $serializer, $apiKey, $secret);
+        return new self($client, $serializer, $apiKey, $secretKey);
     }
 
     public function addMiddleware(Middleware $middleware): self
@@ -121,7 +121,7 @@ final class RestClientBuilder
             $this->client,
             $this->serializer,
             $this->apiKey,
-            $this->secret,
+            $this->secretKey,
             array_merge($this->middlewares, [$middleware])
         );
     }
@@ -135,19 +135,19 @@ final class RestClientBuilder
             $this->client,
             $this->serializer,
             $this->apiKey,
-            $this->secret,
+            $this->secretKey,
             $middlewares
         );
     }
 
     public function withSerializer(Serializer $serializer): self
     {
-        return new self($this->client, $serializer, $this->apiKey, $this->secret);
+        return new self($this->client, $serializer, $this->apiKey, $this->secretKey);
     }
 
     public function withClient(PsrHttpClient $client): self
     {
-        return new self($client, $this->serializer, $this->apiKey, $this->secret);
+        return new self($client, $this->serializer, $this->apiKey, $this->secretKey);
     }
 
     /**
@@ -160,7 +160,7 @@ final class RestClientBuilder
             new HttpClient(
                 new ConfigurationClient(
                     $this->apiKey,
-                    $this->secret,
+                    $this->secretKey,
                     $url
                 ),
                 $this->client,

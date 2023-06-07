@@ -20,9 +20,9 @@ final class AuthorizationMiddleware implements Middleware
     {
         $request = $request->withAddedHeader('Content-Type', 'application/json');
 
-        if (null != $configuration->getToken() && null != $configuration->getSecret()) {
-            $request = $request->withAddedHeader('Authorization', sprintf('TOKEN %s', $configuration->getToken()))
-                ->withAddedHeader('X-Secret', $configuration->getSecret())
+        if (null != $configuration->getApiKey() && null != $configuration->getSecretKey()) {
+            $request = $request->withAddedHeader('Authorization', sprintf('TOKEN %s', $configuration->getApiKey()))
+                ->withAddedHeader('X-Secret', $configuration->getSecretKey())
             ;
         }
 
