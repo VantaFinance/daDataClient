@@ -70,7 +70,7 @@ final class RestClientBuilder
         $this->client      = $client;
         $this->serializer  = $serializer;
         $this->apiKey      = $apiKey;
-        $this->secretKey      = $secretKey;
+        $this->secretKey   = $secretKey;
         $this->middlewares = array_merge($middlewares, [
             new AuthorizationMiddleware(),
             new UrlMiddleware(),
