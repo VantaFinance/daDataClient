@@ -36,7 +36,8 @@
         "phpdocumentor/reflection-docblock": "^5.0",
         "doctrine/annotations": "^1.0|^2.0",
         "moneyphp/money": "^3.0|^4.0",
-        "myclabs/php-enum": "^1.0"
+        "myclabs/php-enum": "^1.0",
+        "composer/semver": "^3.3"
     },
     "suggest": {
         "psr/http-client-implementation": "Psr http client implementation"
