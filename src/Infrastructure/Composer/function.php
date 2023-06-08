@@ -96,6 +96,6 @@ final class Version
 
     public function isOld(self $version): bool
     {
-        return $this->major < $version->getMajor() && $this->minor <=> $version->getMinor();
+        return $this->major <= $version->getMajor() && $this->minor <=> $version->getMinor();
     }
 }
