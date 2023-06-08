@@ -28,8 +28,8 @@ use PHPStan\PhpDocParser\Ast\Type\NullableTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\ThisTypeNode;
 use PHPStan\PhpDocParser\Ast\Type\TypeNode;
 use PHPStan\PhpDocParser\Ast\Type\UnionTypeNode;
-use Vanta\Integration\DaData\Infrastructure\PropertyInfo\PhpStan\NameScope;
 use Symfony\Component\PropertyInfo\Type;
+use Vanta\Integration\DaData\Infrastructure\PropertyInfo\PhpStan\NameScope;
 
 /**
  * Transforms a php doc tag value to a {@link Type} instance.

@@ -23,12 +23,12 @@ use PHPStan\PhpDocParser\Parser\ConstExprParser;
 use PHPStan\PhpDocParser\Parser\PhpDocParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 use PHPStan\PhpDocParser\Parser\TypeParser;
-use Vanta\Integration\DaData\Infrastructure\PropertyInfo\PhpStan\NameScopeFactory;
-use Vanta\Integration\DaData\Infrastructure\PropertyInfo\Util\PhpStanTypeHelper;
 use Symfony\Component\PropertyInfo\Extractor\ConstructorArgumentTypeExtractorInterface;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface;
 use Symfony\Component\PropertyInfo\Type;
+use Vanta\Integration\DaData\Infrastructure\PropertyInfo\PhpStan\NameScopeFactory;
+use Vanta\Integration\DaData\Infrastructure\PropertyInfo\Util\PhpStanTypeHelper;
 
 /**
  * Extracts data using PHPStan parser.

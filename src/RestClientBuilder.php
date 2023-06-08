@@ -27,6 +27,9 @@ use Symfony\Component\Serializer\Normalizer\UidNormalizer;
 use Symfony\Component\Serializer\Normalizer\UnwrappingDenormalizer;
 use Symfony\Component\Serializer\Serializer as SymfonySerializer;
 use Symfony\Component\Serializer\SerializerInterface as Serializer;
+
+use function Vanta\Integration\DaData\Infrastructure\Composer\isOldPackage;
+
 use Vanta\Integration\DaData\Infrastructure\HttpClient\ConfigurationClient;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\HttpClient;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\AuthorizationMiddleware;
@@ -39,7 +42,6 @@ use Vanta\Integration\DaData\Infrastructure\Serializer\CountryIsoNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\EnumNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\MoneyNormalizer;
 use Vanta\Integration\DaData\Transport\RestSuggestAddressClient;
-use function Vanta\Integration\DaData\Infrastructure\Composer\isOldPackage;
 
 final class RestClientBuilder
 {
