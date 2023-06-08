@@ -15,12 +15,12 @@ final class ConfigurationClient
     /**
      * @var non-empty-string|null
      */
-    private ?string $token;
+    private ?string $apiKey;
 
     /**
      * @var non-empty-string|null
      */
-    private ?string $secret;
+    private ?string $secretKey;
 
     /**
      * @var non-empty-string
@@ -28,31 +28,31 @@ final class ConfigurationClient
     private string $url;
 
     /**
-     * @param non-empty-string|null $token
-     * @param non-empty-string|null $secret
+     * @param non-empty-string|null $apiKey
+     * @param non-empty-string|null $secretKey
      * @param non-empty-string      $url
      */
-    public function __construct(?string $token, ?string $secret, string $url)
+    public function __construct(?string $apiKey, ?string $secretKey, string $url)
     {
-        $this->token  = $token;
-        $this->secret = $secret;
-        $this->url    = $url;
+        $this->apiKey    = $apiKey;
+        $this->secretKey = $secretKey;
+        $this->url       = $url;
     }
 
     /**
      * @return non-empty-string|null
      */
-    public function getToken(): ?string
+    public function getApiKey(): ?string
     {
-        return $this->token;
+        return $this->apiKey;
     }
 
     /**
      * @return non-empty-string|null
      */
-    public function getSecret(): ?string
+    public function getSecretKey(): ?string
     {
-        return $this->secret;
+        return $this->secretKey;
     }
 
     /**
