@@ -28,5 +28,4 @@ function isOldPackage(string $package, string $version): bool
     }
 
     return Comparator::greaterThan($version, $packageVersion);
-
 }
