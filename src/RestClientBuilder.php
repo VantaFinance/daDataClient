@@ -34,10 +34,12 @@ use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\ClientErrorMid
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\InternalServerMiddleware;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\Middleware;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\UrlMiddleware;
+use Vanta\Integration\DaData\Infrastructure\PropertyInfo\Extractor\PollyfillPhpStanExtractor;
 use Vanta\Integration\DaData\Infrastructure\Serializer\CountryIsoNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\EnumNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\MoneyNormalizer;
 use Vanta\Integration\DaData\Transport\RestSuggestAddressClient;
+use function Vanta\Integration\DaData\Infrastructure\Composer\isOldPackage;
 
 final class RestClientBuilder
 {
@@ -88,6 +90,11 @@ final class RestClientBuilder
     public static function create(PsrHttpClient $client, string $apiKey = null, string $secretKey = null): self
     {
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+        $phpStanExtractor     = new PollyfillPhpStanExtractor();
+
+        if (!isOldPackage('symfony/property-info', '6.1')) {
+            $phpStanExtractor = new PhpStanExtractor();
+        }
 
         $serializer = new SymfonySerializer([
             new MoneyNormalizer(),
@@ -102,7 +109,7 @@ final class RestClientBuilder
                 null,
                 new PropertyInfoExtractor(
                     [],
-                    [new Infrastructure\PropertyInfo\Extractor\PhpStanExtractor(new PhpStanExtractor())],
+                    [$phpStanExtractor],
                     [],
                     [],
                     [],
