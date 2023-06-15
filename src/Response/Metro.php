@@ -25,17 +25,13 @@ final class Metro
      */
     private string $line;
 
-    /**
-     * @var numeric-string
-     */
-    private string $distance;
+    private float $distance;
 
     /**
      * @param non-empty-string $name
      * @param non-empty-string $line
-     * @param numeric-string   $distance
      */
-    public function __construct(string $name, string $line, string $distance)
+    public function __construct(string $name, string $line, float $distance)
     {
         $this->name     = $name;
         $this->line     = $line;
@@ -58,10 +54,7 @@ final class Metro
         return $this->line;
     }
 
-    /**
-     * @return numeric-string
-     */
-    public function getDistance(): string
+    public function getDistance(): float
     {
         return $this->distance;
     }
