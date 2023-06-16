@@ -35,9 +35,9 @@ final class FiasActualityState
      */
     public function __construct(string $value)
     {
-        $isDeleted = $value >= self::MIN_RENAMED && $value <= self::MAX_RENAMED;
+        $isRenamed = $value >= self::MIN_RENAMED && $value <= self::MAX_RENAMED;
 
-        if (!in_array($value, [self::ACTUAL, self::REASSIGNED, self::DELETED]) && !$isDeleted){
+        if (!in_array($value, [self::ACTUAL, self::REASSIGNED, self::DELETED]) && !$isRenamed){
             throw new \InvalidArgumentException('Invalid Fias actuality state');
         }
 
