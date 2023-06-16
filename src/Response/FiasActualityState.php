@@ -8,9 +8,7 @@
 
 declare(strict_types=1);
 
-
 namespace Vanta\Integration\DaData\Response;
-
 
 final class FiasActualityState
 {
@@ -24,7 +22,6 @@ final class FiasActualityState
 
     private const MAX_RENAMED = '50';
 
-
     /**
      * @var numeric-string
      */
@@ -37,36 +34,32 @@ final class FiasActualityState
     {
         $isRenamed = $value >= self::MIN_RENAMED && $value <= self::MAX_RENAMED;
 
-        if (!in_array($value, [self::ACTUAL, self::REASSIGNED, self::DELETED]) && !$isRenamed){
+        if (!in_array($value, [self::ACTUAL, self::REASSIGNED, self::DELETED]) && !$isRenamed) {
             throw new \InvalidArgumentException('Invalid Fias actuality state');
         }
 
         $this->value = $value;
     }
 
-
     public function isActual(): bool
     {
-        return $this->value == self::ACTUAL;
+        return self::ACTUAL == $this->value;
     }
 
     public function isDeleted(): bool
     {
-        return $this->value == self::DELETED;
+        return self::DELETED == $this->value;
     }
-
 
     public function isReassigned(): bool
     {
-        return $this->value == self::REASSIGNED;
+        return self::REASSIGNED == $this->value;
     }
-
 
     public function isRenamed(): bool
     {
         return $this->value >= self::MIN_RENAMED && $this->value <= self::MAX_RENAMED;
     }
-
 
     /**
      * @return numeric-string

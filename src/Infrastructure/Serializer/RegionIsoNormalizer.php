@@ -15,7 +15,6 @@ use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface as Denormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface as Normalizer;
-use Vanta\Integration\DaData\Response\CountryIso;
 use Vanta\Integration\DaData\Response\RegionIso;
 
 final class RegionIsoNormalizer implements Normalizer, Denormalizer

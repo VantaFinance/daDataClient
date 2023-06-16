@@ -28,8 +28,6 @@ use Symfony\Component\Serializer\Normalizer\UnwrappingDenormalizer;
 use Symfony\Component\Serializer\Serializer as SymfonySerializer;
 use Symfony\Component\Serializer\SerializerInterface as Serializer;
 
-use Vanta\Integration\DaData\Infrastructure\Serializer\FiasActualityStateNormalizer;
-use Vanta\Integration\DaData\Infrastructure\Serializer\RegionIsoNormalizer;
 use function Vanta\Integration\DaData\Infrastructure\Composer\isOldPackage;
 
 use Vanta\Integration\DaData\Infrastructure\HttpClient\ConfigurationClient;
@@ -42,7 +40,9 @@ use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\UrlMiddleware;
 use Vanta\Integration\DaData\Infrastructure\PropertyInfo\Extractor\PollyfillPhpStanExtractor;
 use Vanta\Integration\DaData\Infrastructure\Serializer\CountryIsoNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\EnumNormalizer;
+use Vanta\Integration\DaData\Infrastructure\Serializer\FiasActualityStateNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\MoneyNormalizer;
+use Vanta\Integration\DaData\Infrastructure\Serializer\RegionIsoNormalizer;
 use Vanta\Integration\DaData\Transport\RestSuggestAddressClient;
 
 final class RestClientBuilder
