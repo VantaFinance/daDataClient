@@ -10,6 +10,9 @@ declare(strict_types=1);
 
 namespace Vanta\Integration\DaData\Response;
 
+/**
+ * @psalm-immutable
+ */
 final class FiasActualityState
 {
     private const ACTUAL = '0';
