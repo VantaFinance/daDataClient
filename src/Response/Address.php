@@ -29,10 +29,7 @@ final class Address
      */
     private ?string $federalDistrict;
 
-    /**
-     * @var non-empty-string|null
-     */
-    private ?string $regionIsoCode;
+    private ?RegionIso $regionIsoCode;
 
     /**
      * @var non-empty-string|null
@@ -331,10 +328,7 @@ final class Address
 
     private ?FiasLevel $fiasLevel;
 
-    /**
-     * @var numeric-string|null
-     */
-    private ?string $fiasActualityState;
+    private ?FiasActualityState $fiasActualityState;
 
     /**
      * @var numeric-string|null
@@ -359,7 +353,6 @@ final class Address
     /**
      * @param numeric-string|null          $postalCode
      * @param non-empty-string|null        $federalDistrict
-     * @param non-empty-string|null        $regionIsoCode
      * @param non-empty-string|null        $cityArea
      * @param non-empty-string|null        $flatArea
      * @param numeric-string|null          $postalBox
@@ -413,7 +406,6 @@ final class Address
      * @param numeric-string|null          $cityDistrictKladrId
      * @param numeric-string|null          $kladrId
      * @param numeric-string|null          $fiasCode
-     * @param numeric-string|null          $fiasActualityState
      * @param numeric-string|null          $geoLat
      * @param numeric-string|null          $geoLon
      * @param array<int, Metro>            $metro
@@ -422,7 +414,7 @@ final class Address
     public function __construct(
         ?string $postalCode,
         ?string $federalDistrict,
-        ?string $regionIsoCode,
+        ?RegionIso $regionIsoCode,
         ?string $cityArea,
         ?string $flatArea,
         ?Money $squareMeterPrice,
@@ -492,7 +484,7 @@ final class Address
         ?CapitalMarker $capitalMarker,
         ?string $fiasCode,
         ?FiasLevel $fiasLevel,
-        ?string $fiasActualityState,
+        ?FiasActualityState $fiasActualityState,
         ?string $geoLat,
         ?string $geoLon,
         ?array $metro = [],
@@ -593,10 +585,7 @@ final class Address
         return $this->federalDistrict;
     }
 
-    /**
-     * @return non-empty-string|null
-     */
-    public function getRegionIsoCode(): ?string
+    public function getRegionIsoCode(): ?RegionIso
     {
         return $this->regionIsoCode;
     }
@@ -1105,10 +1094,7 @@ final class Address
         return $this->fiasLevel;
     }
 
-    /**
-     * @return numeric-string|null
-     */
-    public function getFiasActualityState(): ?string
+    public function getFiasActualityState(): ?FiasActualityState
     {
         return $this->fiasActualityState;
     }

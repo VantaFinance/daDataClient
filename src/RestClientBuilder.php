@@ -28,6 +28,8 @@ use Symfony\Component\Serializer\Normalizer\UnwrappingDenormalizer;
 use Symfony\Component\Serializer\Serializer as SymfonySerializer;
 use Symfony\Component\Serializer\SerializerInterface as Serializer;
 
+use Vanta\Integration\DaData\Infrastructure\Serializer\FiasActualityStateNormalizer;
+use Vanta\Integration\DaData\Infrastructure\Serializer\RegionIsoNormalizer;
 use function Vanta\Integration\DaData\Infrastructure\Composer\isOldPackage;
 
 use Vanta\Integration\DaData\Infrastructure\HttpClient\ConfigurationClient;
@@ -76,10 +78,10 @@ final class RestClientBuilder
         $this->apiKey      = $apiKey;
         $this->secretKey   = $secretKey;
         $this->middlewares = array_merge($middlewares, [
-            new AuthorizationMiddleware(),
             new UrlMiddleware(),
-            new InternalServerMiddleware(),
+            new AuthorizationMiddleware(),
             new ClientErrorMiddleware(),
+            new InternalServerMiddleware(),
         ]);
     }
 
@@ -99,6 +101,8 @@ final class RestClientBuilder
         }
 
         $serializer = new SymfonySerializer([
+            new RegionIsoNormalizer(),
+            new FiasActualityStateNormalizer(),
             new MoneyNormalizer(),
             new EnumNormalizer(),
             new CountryIsoNormalizer(),
