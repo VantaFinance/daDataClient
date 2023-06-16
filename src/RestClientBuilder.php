@@ -36,6 +36,7 @@ use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\AuthorizationM
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\ClientErrorMiddleware;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\InternalServerMiddleware;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\Middleware;
+use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\PipelineMiddleware;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\UrlMiddleware;
 use Vanta\Integration\DaData\Infrastructure\PropertyInfo\Extractor\PollyfillPhpStanExtractor;
 use Vanta\Integration\DaData\Infrastructure\Serializer\CountryIsoNormalizer;
@@ -171,13 +172,8 @@ final class RestClientBuilder
         return new RestSuggestAddressClient(
             $this->serializer,
             new HttpClient(
-                new ConfigurationClient(
-                    $this->apiKey,
-                    $this->secretKey,
-                    $url
-                ),
-                $this->client,
-                $this->middlewares
+                new ConfigurationClient($this->apiKey, $this->secretKey, $url),
+                new PipelineMiddleware($this->middlewares, $this->client)
             )
         );
     }
