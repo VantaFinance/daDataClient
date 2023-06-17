@@ -46,7 +46,7 @@ final class CapitalMarker extends Enum
 
     public static function regionDistrictCenter(): self
     {
-        return new self(self::REGION_CENTER);
+        return new self(self::REGION_DISTRICT_CENTER);
     }
 
     public static function regionDistrictRegion(): self
