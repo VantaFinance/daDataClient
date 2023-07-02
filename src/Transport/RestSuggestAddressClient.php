@@ -21,9 +21,9 @@ use Yiisoft\Http\Method;
 
 final class RestSuggestAddressClient implements SuggestAddressClient
 {
-    private Serializer $serializer;
-
     private HttpClient $client;
+
+    private Serializer $serializer;
 
     public function __construct(Serializer $serializer, HttpClient $client)
     {

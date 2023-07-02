@@ -36,11 +36,14 @@ use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\AuthorizationM
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\ClientErrorMiddleware;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\InternalServerMiddleware;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\Middleware;
+use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\PipelineMiddleware;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\UrlMiddleware;
 use Vanta\Integration\DaData\Infrastructure\PropertyInfo\Extractor\PollyfillPhpStanExtractor;
 use Vanta\Integration\DaData\Infrastructure\Serializer\CountryIsoNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\EnumNormalizer;
+use Vanta\Integration\DaData\Infrastructure\Serializer\FiasActualityStateNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\MoneyNormalizer;
+use Vanta\Integration\DaData\Infrastructure\Serializer\RegionIsoNormalizer;
 use Vanta\Integration\DaData\Transport\RestSuggestAddressClient;
 
 final class RestClientBuilder
@@ -76,10 +79,10 @@ final class RestClientBuilder
         $this->apiKey      = $apiKey;
         $this->secretKey   = $secretKey;
         $this->middlewares = array_merge($middlewares, [
-            new AuthorizationMiddleware(),
             new UrlMiddleware(),
-            new InternalServerMiddleware(),
+            new AuthorizationMiddleware(),
             new ClientErrorMiddleware(),
+            new InternalServerMiddleware(),
         ]);
     }
 
@@ -99,6 +102,8 @@ final class RestClientBuilder
         }
 
         $serializer = new SymfonySerializer([
+            new RegionIsoNormalizer(),
+            new FiasActualityStateNormalizer(),
             new MoneyNormalizer(),
             new EnumNormalizer(),
             new CountryIsoNormalizer(),
@@ -167,13 +172,8 @@ final class RestClientBuilder
         return new RestSuggestAddressClient(
             $this->serializer,
             new HttpClient(
-                new ConfigurationClient(
-                    $this->apiKey,
-                    $this->secretKey,
-                    $url
-                ),
-                $this->client,
-                $this->middlewares
+                new ConfigurationClient($this->apiKey, $this->secretKey, $url),
+                new PipelineMiddleware($this->middlewares, $this->client)
             )
         );
     }
