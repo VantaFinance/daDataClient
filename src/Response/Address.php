@@ -105,7 +105,7 @@ final class Address
     private ?string $flatTypeFull;
 
     /**
-     * @var numeric-string|null
+     * @var non-empty-string|null
      */
     private ?string $flat;
 
@@ -362,7 +362,7 @@ final class Address
      * @param non-empty-string|null        $country
      * @param non-empty-string|null        $flatType
      * @param non-empty-string|null        $flatTypeFull
-     * @param numeric-string|null          $flat
+     * @param non-empty-string|null        $flat
      * @param non-empty-string|null        $blockType
      * @param non-empty-string|null        $blockTypeFull
      * @param non-empty-string|null        $block
@@ -733,7 +733,7 @@ final class Address
     }
 
     /**
-     * @return numeric-string|null
+     * @return non-empty-string|null
      */
     public function getFlat(): ?string
     {
