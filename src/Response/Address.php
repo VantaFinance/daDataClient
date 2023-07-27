@@ -733,7 +733,7 @@ final class Address
     }
 
     /**
-     * @return numeric-string|null
+     * @return non-empty-string|null
      */
     public function getFlat(): ?string
     {
