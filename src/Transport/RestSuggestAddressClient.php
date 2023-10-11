@@ -15,6 +15,7 @@ use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface as HttpClient;
 use Symfony\Component\Serializer\Normalizer\UnwrappingDenormalizer;
 use Symfony\Component\Serializer\SerializerInterface as Serializer;
+use Symfony\Component\Uid\AbstractUid as Uid;
 use Vanta\Integration\DaData\Response\SuggestAddress;
 use Vanta\Integration\DaData\SuggestAddressClient;
 use Yiisoft\Http\Method;
@@ -43,6 +44,27 @@ final class RestSuggestAddressClient implements SuggestAddressClient
             '/suggestions/api/4_1/rs/suggest/address',
             [],
             $this->serializer->serialize(['query' => $query, 'count' => $count], 'json')
+        );
+
+        $response = $this->client->sendRequest($request);
+
+        return $this->serializer->deserialize($response->getBody()->__toString(), SuggestAddress::class . '[]', 'json', [
+            UnwrappingDenormalizer::UNWRAP_PATH => '[suggestions]',
+        ]);
+    }
+
+    /**
+     * @psalm-suppress MixedInferredReturnType,MixedReturnStatement, MixedArgumentTypeCoercion ,MixedArrayOffset, UndefinedConstant,
+     *
+     * @throws ClientExceptionInterface
+     */
+    public function findByFiasId(Uid $id): array
+    {
+        $request = new Request(
+            Method::POST,
+            '/suggestions/api/4_1/rs/findById/address',
+            [],
+            $this->serializer->serialize(['query' => $id->toRfc4122()], 'json')
         );
 
         $response = $this->client->sendRequest($request);
