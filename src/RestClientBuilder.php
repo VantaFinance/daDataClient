@@ -63,7 +63,7 @@ final class RestClientBuilder
     private ?string $secretKey;
 
     /**
-     * @var non-empty-array<int, Middleware>
+     * @var array<int, Middleware>
      */
     private array $middlewares;
 
@@ -72,18 +72,13 @@ final class RestClientBuilder
      * @param non-empty-string|null  $apiKey
      * @param non-empty-string|null  $secretKey
      */
-    private function __construct(PsrHttpClient $client, Serializer $serializer, ?string $apiKey, ?string $secretKey, array $middlewares = [])
+    private function __construct(PsrHttpClient $client, Serializer $serializer, ?string $apiKey, ?string $secretKey, array $middlewares)
     {
         $this->client      = $client;
         $this->serializer  = $serializer;
         $this->apiKey      = $apiKey;
         $this->secretKey   = $secretKey;
-        $this->middlewares = array_merge($middlewares, [
-            new UrlMiddleware(),
-            new AuthorizationMiddleware(),
-            new ClientErrorMiddleware(),
-            new InternalServerMiddleware(),
-        ]);
+        $this->middlewares = $middlewares;
     }
 
     /**
@@ -126,7 +121,14 @@ final class RestClientBuilder
             new ArrayDenormalizer(),
         ], [new JsonEncoder()]);
 
-        return new self($client, $serializer, $apiKey, $secretKey);
+        $middlewares = [
+            new UrlMiddleware(),
+            new AuthorizationMiddleware(),
+            new ClientErrorMiddleware(),
+            new InternalServerMiddleware(),
+        ];
+
+        return new self($client, $serializer, $apiKey, $secretKey, $middlewares);
     }
 
     public function addMiddleware(Middleware $middleware): self
@@ -156,12 +158,12 @@ final class RestClientBuilder
 
     public function withSerializer(Serializer $serializer): self
     {
-        return new self($this->client, $serializer, $this->apiKey, $this->secretKey);
+        return new self($this->client, $serializer, $this->apiKey, $this->secretKey, $this->middlewares);
     }
 
     public function withClient(PsrHttpClient $client): self
     {
-        return new self($client, $this->serializer, $this->apiKey, $this->secretKey);
+        return new self($client, $this->serializer, $this->apiKey, $this->secretKey, $this->middlewares);
     }
 
     /**
