@@ -63,7 +63,7 @@ final class RestClientBuilder
     private ?string $secretKey;
 
     /**
-     * @var non-empty-array<int, Middleware>
+     * @var array<int, Middleware>
      */
     private array $middlewares;
 
