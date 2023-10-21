@@ -136,7 +136,7 @@ final class RestClientBuilder
             $this->serializer,
             $this->apiKey,
             $this->secretKey,
-            array_merge($this->middlewares, [$middleware])
+            [$middleware]
         );
     }
 
