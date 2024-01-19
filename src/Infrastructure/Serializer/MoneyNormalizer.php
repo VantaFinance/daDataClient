@@ -10,8 +10,11 @@ declare(strict_types=1);
 
 namespace Vanta\Integration\DaData\Infrastructure\Serializer;
 
+use Money\Currencies\ISOCurrencies;
 use Money\Currency;
+use Money\Formatter\DecimalMoneyFormatter;
 use Money\Money;
+use Money\Parser\DecimalMoneyParser;
 use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
@@ -67,8 +70,11 @@ final class MoneyNormalizer implements Normalizer, Denormalizer
             );
         }
 
+        $moneyParser = new DecimalMoneyParser(new ISOCurrencies());
+        $money       = new Money($moneyParser->parse($data, new Currency('RUB'))->getAmount(), new Currency('NON'));
+
         try {
-            return new Money($data, new Currency('NON'));
+            return $money;
         } catch (\InvalidArgumentException $e) {
             throw NotNormalizableValueException::createForUnexpectedDataType(
                 $e->getMessage(),
@@ -96,6 +102,6 @@ final class MoneyNormalizer implements Normalizer, Denormalizer
             throw new UnexpectedValueException(sprintf('Allowed type: %s', Money::class));
         }
 
-        return $object->getAmount();
+        return (new DecimalMoneyFormatter(new ISOCurrencies()))->format($object);
     }
 }

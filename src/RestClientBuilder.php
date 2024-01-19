@@ -82,7 +82,7 @@ final class RestClientBuilder
     }
 
     /**
-     * @psalm-suppress MixedArgumentTypeCoercion,TooManyArguments, UndefinedClass, MissingDependency, InvalidArgument
+     * @psalm-suppress MixedArgumentTypeCoercion,TooManyArguments, UndefinedClass, MissingDependency, InvalidArgument, DeprecatedClass
      *
      * @param non-empty-string|null $apiKey
      * @param non-empty-string|null $secretKey
