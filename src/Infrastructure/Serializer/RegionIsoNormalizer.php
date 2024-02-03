@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Vanta\Integration\DaData\Infrastructure\Serializer;
 
+use Money\Money;
 use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
@@ -19,6 +20,15 @@ use Vanta\Integration\DaData\Response\RegionIso;
 
 final class RegionIsoNormalizer implements Normalizer, Denormalizer
 {
+    /**
+     * @return array<class-string, true>
+     */
+    public function getSupportedTypes(?string $format): array
+    {
+        return [RegionIso::class => true];
+    }
+
+
     /**
      * @psalm-suppress MissingParamType
      *

@@ -19,6 +19,16 @@ use Vanta\Integration\DaData\Response\CountryIso;
 
 final class CountryIsoNormalizer implements Normalizer, Denormalizer
 {
+
+    /**
+     * @return array<class-string, true>
+     */
+    public function getSupportedTypes(?string $format): array
+    {
+        return [CountryIso::class => true];
+    }
+
+
     /**
      * @psalm-suppress MissingParamType
      *
