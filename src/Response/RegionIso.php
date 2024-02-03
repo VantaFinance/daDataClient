@@ -25,7 +25,7 @@ final class RegionIso
      */
     public function __construct(string $value)
     {
-        if (!preg_match('/^[A-Z]{2}-[A-Z]{2,3}$/', $value)) {
+        if (!preg_match('/^[A-Z]{2}-([A-Z]|\d){2,3}$/', $value)) {
             throw new \InvalidArgumentException('Invalid region iso code');
         }
 
