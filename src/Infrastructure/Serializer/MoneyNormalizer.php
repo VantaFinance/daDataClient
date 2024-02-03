@@ -25,7 +25,7 @@ final class MoneyNormalizer implements Normalizer, Denormalizer
      *
      * @param array<string, mixed> $context
      */
-    public function supportsDenormalization($data, string $type, string $format = null, array $context = []): bool
+    public function supportsDenormalization($data, string $type, ?string $format = null, array $context = []): bool
     {
         return Money::class == $type;
     }
@@ -35,7 +35,7 @@ final class MoneyNormalizer implements Normalizer, Denormalizer
      *
      * @param array{deserialization_path?: non-empty-string} $context
      */
-    public function denormalize($data, string $type, string $format = null, array $context = []): Money
+    public function denormalize($data, string $type, ?string $format = null, array $context = []): Money
     {
         if (!\is_string($data)) {
             throw NotNormalizableValueException::createForUnexpectedDataType(
@@ -85,12 +85,12 @@ final class MoneyNormalizer implements Normalizer, Denormalizer
      *
      * @param array<string, mixed> $context
      */
-    public function supportsNormalization($data, string $format = null, array $context = []): bool
+    public function supportsNormalization($data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof Money;
     }
 
-    public function normalize($object, string $format = null, array $context = []): string
+    public function normalize($object, ?string $format = null, array $context = []): string
     {
         if (!$object instanceof Money) {
             throw new UnexpectedValueException(sprintf('Allowed type: %s', Money::class));
