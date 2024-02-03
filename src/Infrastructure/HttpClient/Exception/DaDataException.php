@@ -25,7 +25,7 @@ abstract class DaDataException extends \Exception implements ClientException
         Request $request,
         string $message = '',
         int $code = 0,
-        \Throwable $previous = null
+        ?\Throwable $previous = null
     ) {
         $this->response = $response;
         $this->request  = $request;

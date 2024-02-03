@@ -87,7 +87,7 @@ final class RestClientBuilder
      * @param non-empty-string|null $apiKey
      * @param non-empty-string|null $secretKey
      */
-    public static function create(PsrHttpClient $client, string $apiKey = null, string $secretKey = null): self
+    public static function create(PsrHttpClient $client, ?string $apiKey = null, ?string $secretKey = null): self
     {
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         $phpStanExtractor     = new PollyfillPhpStanExtractor();

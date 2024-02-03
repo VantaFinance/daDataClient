@@ -20,11 +20,19 @@ use Vanta\Integration\DaData\Response\FiasActualityState;
 final class FiasActualityStateNormalizer implements Normalizer, Denormalizer
 {
     /**
+     * @return array<class-string, true>
+     */
+    public function getSupportedTypes(?string $format): array
+    {
+        return [FiasActualityState::class => true];
+    }
+
+    /**
      * @psalm-suppress MissingParamType
      *
      * @param array<string, mixed> $context
      */
-    public function supportsNormalization($data, string $format = null, array $context = []): bool
+    public function supportsNormalization($data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof FiasActualityState;
     }
@@ -37,7 +45,7 @@ final class FiasActualityStateNormalizer implements Normalizer, Denormalizer
      *
      * @return numeric-string
      */
-    public function normalize($object, string $format = null, array $context = []): string
+    public function normalize($object, ?string $format = null, array $context = []): string
     {
         if (!$object instanceof FiasActualityState) {
             throw new UnexpectedValueException(sprintf('Allowed type: %s', FiasActualityState::class));
@@ -51,17 +59,17 @@ final class FiasActualityStateNormalizer implements Normalizer, Denormalizer
      *
      * @param array<string, mixed> $context
      */
-    public function supportsDenormalization($data, string $type, string $format = null, array $context = []): bool
+    public function supportsDenormalization($data, string $type, ?string $format = null, array $context = []): bool
     {
         return FiasActualityState::class == $type;
     }
 
     /**
-     * @psalm-suppress MissingParamType
+     * @psalm-suppress MissingParamType, MoreSpecificImplementedParamType
      *
      * @param array{deserialization_path?: non-empty-string} $context
      */
-    public function denormalize($data, string $type, string $format = null, array $context = []): FiasActualityState
+    public function denormalize($data, string $type, ?string $format = null, array $context = []): FiasActualityState
     {
         if (!\is_string($data)) {
             throw NotNormalizableValueException::createForUnexpectedDataType(
