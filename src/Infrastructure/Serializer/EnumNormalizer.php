@@ -16,15 +16,11 @@ use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface as Denormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface as Normalizer;
-use Vanta\Integration\DaData\Response\CountryIso;
 
 final class EnumNormalizer implements Denormalizer, Normalizer
 {
-
     /**
-     * @param string|null $format
-     *
-     * @return true[]
+     * @return array<class-string, true>
      */
     public function getSupportedTypes(?string $format): array
     {

@@ -15,7 +15,6 @@ use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface as Denormalizer;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface as Normalizer;
-use Vanta\Integration\DaData\Response\CountryIso;
 use Vanta\Integration\DaData\Response\FiasActualityState;
 
 final class FiasActualityStateNormalizer implements Normalizer, Denormalizer
@@ -27,7 +26,6 @@ final class FiasActualityStateNormalizer implements Normalizer, Denormalizer
     {
         return [FiasActualityState::class => true];
     }
-
 
     /**
      * @psalm-suppress MissingParamType
