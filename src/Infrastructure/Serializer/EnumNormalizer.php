@@ -24,7 +24,7 @@ final class EnumNormalizer implements Denormalizer, Normalizer
      *
      * @param array<string, string> $context
      */
-    public function supportsDenormalization($data, string $type = null, string $format = null, array $context = []): bool
+    public function supportsDenormalization($data, ?string $type = null, ?string $format = null, array $context = []): bool
     {
         return is_subclass_of($type ?? '', Enum::class);
     }
@@ -40,7 +40,7 @@ final class EnumNormalizer implements Denormalizer, Normalizer
      *
      * @return Enum<T>
      */
-    public function denormalize($data, string $type, string $format = null, array $context = []): Enum
+    public function denormalize($data, string $type, ?string $format = null, array $context = []): Enum
     {
         if (!$type::isValid($data)) {
             throw NotNormalizableValueException::createForUnexpectedDataType(
@@ -68,7 +68,7 @@ final class EnumNormalizer implements Denormalizer, Normalizer
      *
      * @param array<string, string> $context
      */
-    public function supportsNormalization($data, string $format = null, array $context = []): bool
+    public function supportsNormalization($data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof Enum;
     }
@@ -83,7 +83,7 @@ final class EnumNormalizer implements Denormalizer, Normalizer
      *
      * @return T
      */
-    public function normalize($object, string $format = null, array $context = [])
+    public function normalize($object, ?string $format = null, array $context = [])
     {
         return $object->getValue();
     }

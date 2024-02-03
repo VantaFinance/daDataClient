@@ -24,7 +24,7 @@ final class CountryIsoNormalizer implements Normalizer, Denormalizer
      *
      * @param array<string, mixed> $context
      */
-    public function supportsDenormalization($data, string $type, string $format = null, array $context = []): bool
+    public function supportsDenormalization($data, string $type, ?string $format = null, array $context = []): bool
     {
         return CountryIso::class == $type;
     }
@@ -34,7 +34,7 @@ final class CountryIsoNormalizer implements Normalizer, Denormalizer
      *
      * @param array{deserialization_path?: non-empty-string} $context
      */
-    public function denormalize($data, string $type, string $format = null, array $context = []): CountryIso
+    public function denormalize($data, string $type, ?string $format = null, array $context = []): CountryIso
     {
         if (!\is_string($data)) {
             throw NotNormalizableValueException::createForUnexpectedDataType(
@@ -74,7 +74,7 @@ final class CountryIsoNormalizer implements Normalizer, Denormalizer
      *
      * @param array<string, mixed> $context
      */
-    public function supportsNormalization($data, string $format = null, array $context = []): bool
+    public function supportsNormalization($data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof CountryIso;
     }
@@ -87,7 +87,7 @@ final class CountryIsoNormalizer implements Normalizer, Denormalizer
      *
      * @return non-empty-string
      */
-    public function normalize($object, string $format = null, array $context = []): string
+    public function normalize($object, ?string $format = null, array $context = []): string
     {
         if (!$object instanceof CountryIso) {
             throw new UnexpectedValueException(sprintf('Allowed type: %s', CountryIso::class));
