@@ -30,7 +30,7 @@ final class EnumNormalizer implements Denormalizer, Normalizer
     }
 
     /**
-     * @psalm-suppress InvalidArgument,
+     * @psalm-suppress InvalidArgument,MoreSpecificImplementedParamType
      *
      * @template T
      *

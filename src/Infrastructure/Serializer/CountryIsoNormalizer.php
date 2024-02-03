@@ -30,7 +30,7 @@ final class CountryIsoNormalizer implements Normalizer, Denormalizer
     }
 
     /**
-     * @psalm-suppress MissingParamType
+     * @psalm-suppress MissingParamType, MoreSpecificImplementedParamType
      *
      * @param array{deserialization_path?: non-empty-string} $context
      */
