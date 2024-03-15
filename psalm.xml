@@ -16,9 +16,6 @@
             <directory name="src/Infrastructure/PropertyInfo"/>
         </ignoreFiles>
     </projectFiles>
-    <extraFiles>
-        <directory name="vendor/symfony/uid" />
-    </extraFiles>
     <plugins>
         <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
     </plugins>
