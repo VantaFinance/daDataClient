@@ -29,8 +29,6 @@ final class FiasActualityStateNormalizer implements Normalizer, Denormalizer
 
     /**
      * @psalm-suppress MissingParamType
-     *
-     * @param array<string, mixed> $context
      */
     public function supportsNormalization($data, ?string $format = null, array $context = []): bool
     {
@@ -56,8 +54,6 @@ final class FiasActualityStateNormalizer implements Normalizer, Denormalizer
 
     /**
      * @psalm-suppress MissingParamType
-     *
-     * @param array<string, mixed> $context
      */
     public function supportsDenormalization($data, string $type, ?string $format = null, array $context = []): bool
     {
@@ -65,7 +61,7 @@ final class FiasActualityStateNormalizer implements Normalizer, Denormalizer
     }
 
     /**
-     * @psalm-suppress MissingParamType, MoreSpecificImplementedParamType
+     * @psalm-suppress MissingParamType, MoreSpecificImplementedParamType, MethodSignatureMismatch
      *
      * @param array{deserialization_path?: non-empty-string} $context
      */
@@ -97,7 +93,7 @@ final class FiasActualityStateNormalizer implements Normalizer, Denormalizer
             throw NotNormalizableValueException::createForUnexpectedDataType(
                 $e->getMessage(),
                 $data,
-                [Type::BUILTIN_TYPE_INT, Type::BUILTIN_TYPE_STRING],
+                [Type::BUILTIN_TYPE_STRING],
                 $context['deserialization_path'] ?? null,
                 true
             );

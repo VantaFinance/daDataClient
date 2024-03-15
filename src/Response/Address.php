@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Vanta\Integration\DaData\Response;
 
 use Money\Money;
-use Symfony\Component\Uid\AbstractUid as Uid;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @psalm-immutable
@@ -76,23 +76,23 @@ final class Address
 
     private ?CountryIso $countryIsoCode;
 
-    private ?Uid $flatFiasId;
+    private ?Uuid $flatFiasId;
 
-    private ?Uid $houseFiasId;
+    private ?Uuid $houseFiasId;
 
-    private ?Uid $cityDistrictFiasId;
+    private ?Uuid $cityDistrictFiasId;
 
-    private ?Uid $settlementFiasId;
+    private ?Uuid $settlementFiasId;
 
-    private ?Uid $areaFiasId;
+    private ?Uuid $areaFiasId;
 
-    private ?Uid $regionFiasId;
+    private ?Uuid $regionFiasId;
 
-    private ?Uid $cityFiasId;
+    private ?Uuid $cityFiasId;
 
-    private ?Uid $fiasId;
+    private ?Uuid $fiasId;
 
-    private ?Uid $streetFiasId;
+    private ?Uuid $streetFiasId;
 
     /**
      * @var non-empty-string|null
@@ -427,15 +427,15 @@ final class Address
         ?QcGeo $qcGeo,
         ?string $country,
         ?CountryIso $countryIsoCode,
-        ?Uid $flatFiasId,
-        ?Uid $houseFiasId,
-        ?Uid $cityDistrictFiasId,
-        ?Uid $settlementFiasId,
-        ?Uid $areaFiasId,
-        ?Uid $regionFiasId,
-        ?Uid $cityFiasId,
-        ?Uid $fiasId,
-        ?Uid $streetFiasId,
+        ?Uuid $flatFiasId,
+        ?Uuid $houseFiasId,
+        ?Uuid $cityDistrictFiasId,
+        ?Uuid $settlementFiasId,
+        ?Uuid $areaFiasId,
+        ?Uuid $regionFiasId,
+        ?Uuid $cityFiasId,
+        ?Uuid $fiasId,
+        ?Uuid $streetFiasId,
         ?string $flatType,
         ?string $flatTypeFull,
         ?string $flat,
@@ -671,47 +671,47 @@ final class Address
         return $this->countryIsoCode;
     }
 
-    public function getFlatFiasId(): ?Uid
+    public function getFlatFiasId(): ?Uuid
     {
         return $this->flatFiasId;
     }
 
-    public function getHouseFiasId(): ?Uid
+    public function getHouseFiasId(): ?Uuid
     {
         return $this->houseFiasId;
     }
 
-    public function getCityDistrictFiasId(): ?Uid
+    public function getCityDistrictFiasId(): ?Uuid
     {
         return $this->cityDistrictFiasId;
     }
 
-    public function getSettlementFiasId(): ?Uid
+    public function getSettlementFiasId(): ?Uuid
     {
         return $this->settlementFiasId;
     }
 
-    public function getAreaFiasId(): ?Uid
+    public function getAreaFiasId(): ?Uuid
     {
         return $this->areaFiasId;
     }
 
-    public function getRegionFiasId(): ?Uid
+    public function getRegionFiasId(): ?Uuid
     {
         return $this->regionFiasId;
     }
 
-    public function getCityFiasId(): ?Uid
+    public function getCityFiasId(): ?Uuid
     {
         return $this->cityFiasId;
     }
 
-    public function getFiasId(): ?Uid
+    public function getFiasId(): ?Uuid
     {
         return $this->fiasId;
     }
 
-    public function getStreetFiasId(): ?Uid
+    public function getStreetFiasId(): ?Uuid
     {
         return $this->streetFiasId;
     }

@@ -28,9 +28,7 @@ final class RegionIsoNormalizer implements Normalizer, Denormalizer
     }
 
     /**
-     * @psalm-suppress MissingParamType
-     *
-     * @param array<string, mixed> $context
+     * @psalm-suppress MissingParamType, MethodSignatureMismatch
      */
     public function supportsDenormalization($data, string $type, ?string $format = null, array $context = []): bool
     {
@@ -38,7 +36,7 @@ final class RegionIsoNormalizer implements Normalizer, Denormalizer
     }
 
     /**
-     * @psalm-suppress MissingParamType, MoreSpecificImplementedParamType
+     * @psalm-suppress MissingParamType, MoreSpecificImplementedParamType, MethodSignatureMismatch
      *
      * @param array{deserialization_path?: non-empty-string} $context
      */
@@ -78,9 +76,7 @@ final class RegionIsoNormalizer implements Normalizer, Denormalizer
     }
 
     /**
-     * @psalm-suppress MissingParamType
-     *
-     * @param array<string, mixed> $context
+     * @psalm-suppress MissingParamType*
      */
     public function supportsNormalization($data, ?string $format = null, array $context = []): bool
     {
