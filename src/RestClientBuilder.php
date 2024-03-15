@@ -10,15 +10,13 @@ declare(strict_types=1);
 
 namespace Vanta\Integration\DaData;
 
-use Doctrine\Common\Annotations\AnnotationReader;
 use Psr\Http\Client\ClientInterface as PsrHttpClient;
 use Symfony\Component\PropertyInfo\Extractor\PhpStanExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Mapping\ClassDiscriminatorFromClassMetadata;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
-use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
-use Symfony\Component\Serializer\Mapping\Loader\AttributeLoader;
+use Symfony\Component\Serializer\Mapping\Loader\LoaderChain;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\NameConverter\MetadataAwareNameConverter;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
@@ -90,21 +88,8 @@ final class RestClientBuilder
      */
     public static function create(PsrHttpClient $client, ?string $apiKey = null, ?string $secretKey = null): self
     {
-        $classMetadataFactory = null;
-
-        if (class_exists(AnnotationLoader::class) && class_exists(AnnotationReader::class)) {
-            $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-        }
-
-        if (class_exists(AttributeLoader::class)) {
-            $classMetadataFactory = new ClassMetadataFactory(new AttributeLoader());
-        }
-
-        if (null == $classMetadataFactory) {
-            throw new \RuntimeException('Not found attribute reader');
-        }
-
-        $phpStanExtractor = new PollyfillPhpStanExtractor();
+        $classMetadataFactory = new ClassMetadataFactory(new LoaderChain([]));
+        $phpStanExtractor     = new PollyfillPhpStanExtractor();
 
         if (!isOldPackage('symfony/property-info', '6.1')) {
             $phpStanExtractor = new PhpStanExtractor();
