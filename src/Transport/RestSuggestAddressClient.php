@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace Vanta\Integration\DaData\Transport;
 
 use GuzzleHttp\Psr7\Request;
-use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface as HttpClient;
 use Symfony\Component\Serializer\Normalizer\UnwrappingDenormalizer;
 use Symfony\Component\Serializer\SerializerInterface as Serializer;
@@ -31,11 +30,6 @@ final class RestSuggestAddressClient implements SuggestAddressClient
         $this->client     = $client;
     }
 
-    /**
-     * @psalm-suppress MixedInferredReturnType,MixedReturnStatement, MixedArgumentTypeCoercion ,MixedArrayOffset, UndefinedConstant,
-     *
-     * @throws ClientExceptionInterface
-     */
     public function findByText(string $query, int $count = 1): array
     {
         $request = new Request(
@@ -45,10 +39,13 @@ final class RestSuggestAddressClient implements SuggestAddressClient
             $this->serializer->serialize(['query' => $query, 'count' => $count], 'json')
         );
 
-        $response = $this->client->sendRequest($request);
+        $content = $this->client->sendRequest($request)->getBody()->__toString();
 
-        return $this->serializer->deserialize($response->getBody()->__toString(), SuggestAddress::class . '[]', 'json', [
+        /** @var list<SuggestAddress> $value */
+        $value = $this->serializer->deserialize($content, SuggestAddress::class . '[]', 'json', [
             UnwrappingDenormalizer::UNWRAP_PATH => '[suggestions]',
         ]);
+
+        return $value;
     }
 }

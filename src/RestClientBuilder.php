@@ -81,8 +81,6 @@ final class RestClientBuilder
     }
 
     /**
-     * @psalm-suppress UndefinedClass, DeprecatedClass
-     *
      * @param non-empty-string|null $apiKey
      * @param non-empty-string|null $secretKey
      */
