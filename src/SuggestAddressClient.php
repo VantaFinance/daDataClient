@@ -19,7 +19,7 @@ interface SuggestAddressClient
      * @param positive-int     $count
      * @param non-empty-string $query
      *
-     * @return array<int, SuggestAddress>
+     * @return list<SuggestAddress>
      *
      * @throws ClientException
      */

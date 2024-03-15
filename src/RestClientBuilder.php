@@ -10,14 +10,13 @@ declare(strict_types=1);
 
 namespace Vanta\Integration\DaData;
 
-use Doctrine\Common\Annotations\AnnotationReader;
 use Psr\Http\Client\ClientInterface as PsrHttpClient;
 use Symfony\Component\PropertyInfo\Extractor\PhpStanExtractor;
 use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Mapping\ClassDiscriminatorFromClassMetadata;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
-use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
+use Symfony\Component\Serializer\Mapping\Loader\LoaderChain;
 use Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter;
 use Symfony\Component\Serializer\NameConverter\MetadataAwareNameConverter;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
@@ -82,14 +81,12 @@ final class RestClientBuilder
     }
 
     /**
-     * @psalm-suppress MixedArgumentTypeCoercion,TooManyArguments, UndefinedClass, MissingDependency, InvalidArgument, DeprecatedClass
-     *
      * @param non-empty-string|null $apiKey
      * @param non-empty-string|null $secretKey
      */
     public static function create(PsrHttpClient $client, ?string $apiKey = null, ?string $secretKey = null): self
     {
-        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+        $classMetadataFactory = new ClassMetadataFactory(new LoaderChain([]));
         $phpStanExtractor     = new PollyfillPhpStanExtractor();
 
         if (!isOldPackage('symfony/property-info', '6.1')) {

@@ -15,9 +15,8 @@ use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface as Denormalizer;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface as Normalizer;
 
-final class EnumNormalizer implements Denormalizer, Normalizer
+final class EnumNormalizer implements Denormalizer
 {
     /**
      * @return array<class-string, true>
@@ -28,9 +27,7 @@ final class EnumNormalizer implements Denormalizer, Normalizer
     }
 
     /**
-     * @psalm-suppress MissingParamType
-     *
-     * @param array<string, string> $context
+     * @psalm-suppress MissingParamType, MethodSignatureMismatch
      */
     public function supportsDenormalization($data, ?string $type = null, ?string $format = null, array $context = []): bool
     {
@@ -38,7 +35,7 @@ final class EnumNormalizer implements Denormalizer, Normalizer
     }
 
     /**
-     * @psalm-suppress InvalidArgument,MoreSpecificImplementedParamType
+     * @psalm-suppress InvalidArgument,MoreSpecificImplementedParamType, MethodSignatureMismatch, ImplementedReturnTypeMismatch
      *
      * @template T
      *
@@ -69,30 +66,5 @@ final class EnumNormalizer implements Denormalizer, Normalizer
         } catch (\UnexpectedValueException $e) {
             throw new UnexpectedValueException($e->getMessage(), 0, $e);
         }
-    }
-
-    /**
-     * @psalm-suppress MissingParamType
-     *
-     * @param array<string, string> $context
-     */
-    public function supportsNormalization($data, ?string $format = null, array $context = []): bool
-    {
-        return $data instanceof Enum;
-    }
-
-    /**
-     * @psalm-suppress MoreSpecificImplementedParamType
-     *
-     * @template T of scalar
-     *
-     * @param Enum<T>       $object
-     * @param array<string> $context
-     *
-     * @return T
-     */
-    public function normalize($object, ?string $format = null, array $context = [])
-    {
-        return $object->getValue();
     }
 }

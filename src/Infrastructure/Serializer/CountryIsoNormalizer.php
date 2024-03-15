@@ -29,8 +29,6 @@ final class CountryIsoNormalizer implements Normalizer, Denormalizer
 
     /**
      * @psalm-suppress MissingParamType
-     *
-     * @param array<string, mixed> $context
      */
     public function supportsDenormalization($data, string $type, ?string $format = null, array $context = []): bool
     {
@@ -38,7 +36,7 @@ final class CountryIsoNormalizer implements Normalizer, Denormalizer
     }
 
     /**
-     * @psalm-suppress MissingParamType, MoreSpecificImplementedParamType
+     * @psalm-suppress MissingParamType, MoreSpecificImplementedParamType, MethodSignatureMismatch
      *
      * @param array{deserialization_path?: non-empty-string} $context
      */
@@ -79,8 +77,6 @@ final class CountryIsoNormalizer implements Normalizer, Denormalizer
 
     /**
      * @psalm-suppress MissingParamType
-     *
-     * @param array<string, mixed> $context
      */
     public function supportsNormalization($data, ?string $format = null, array $context = []): bool
     {
