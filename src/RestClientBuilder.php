@@ -27,6 +27,8 @@ use Symfony\Component\Serializer\Normalizer\UnwrappingDenormalizer;
 use Symfony\Component\Serializer\Serializer as SymfonySerializer;
 use Symfony\Component\Serializer\SerializerInterface as Serializer;
 
+use Vanta\Integration\DaData\Infrastructure\Serializer\PhoneNumberNormalizer;
+use Vanta\Integration\DaData\Transport\RestSuggestOrganizationClient;
 use function Vanta\Integration\DaData\Infrastructure\Composer\isOldPackage;
 
 use Vanta\Integration\DaData\Infrastructure\HttpClient\ConfigurationClient;
@@ -102,6 +104,7 @@ final class RestClientBuilder
             new UnwrappingDenormalizer(),
             new DateTimeNormalizer(),
             new UidNormalizer(),
+            new PhoneNumberNormalizer(),
             new ObjectNormalizer(
                 $classMetadataFactory,
                 new MetadataAwareNameConverter($classMetadataFactory, new CamelCaseToSnakeCaseNameConverter()),
@@ -169,6 +172,20 @@ final class RestClientBuilder
     public function createSuggestAddressClient(string $url = 'https://suggestions.dadata.ru'): SuggestAddressClient
     {
         return new RestSuggestAddressClient(
+            $this->serializer,
+            new HttpClient(
+                new ConfigurationClient($this->apiKey, $this->secretKey, $url),
+                new PipelineMiddleware($this->middlewares, $this->client)
+            )
+        );
+    }
+
+    /**
+     * @param non-empty-string $url
+     */
+    public function createSuggestOrganizationClient(string $url = 'https://suggestions.dadata.ru'): SuggestOrganizationClient
+    {
+        return new RestSuggestOrganizationClient(
             $this->serializer,
             new HttpClient(
                 new ConfigurationClient($this->apiKey, $this->secretKey, $url),
