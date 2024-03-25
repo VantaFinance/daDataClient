@@ -42,6 +42,8 @@ use Vanta\Integration\DaData\Infrastructure\Serializer\CountryIsoNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\EnumNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\FiasActualityStateNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\MoneyNormalizer;
+use Vanta\Integration\DaData\Infrastructure\Serializer\OrganizationBranchTypeNormalizer;
+use Vanta\Integration\DaData\Infrastructure\Serializer\OrganizationStateStatusNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\PhoneNumberNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\RegionIsoNormalizer;
 use Vanta\Integration\DaData\Transport\RestSuggestAddressClient;
@@ -99,12 +101,14 @@ final class RestClientBuilder
             new RegionIsoNormalizer(),
             new FiasActualityStateNormalizer(),
             new MoneyNormalizer(),
-            new EnumNormalizer(),
             new CountryIsoNormalizer(),
             new UnwrappingDenormalizer(),
             new DateTimeNormalizer(),
             new UidNormalizer(),
+            new OrganizationStateStatusNormalizer(),
+            new OrganizationBranchTypeNormalizer(),
             new PhoneNumberNormalizer(),
+            new EnumNormalizer(),
             new ObjectNormalizer(
                 $classMetadataFactory,
                 new MetadataAwareNameConverter($classMetadataFactory, new CamelCaseToSnakeCaseNameConverter()),

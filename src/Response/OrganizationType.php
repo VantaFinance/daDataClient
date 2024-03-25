@@ -15,7 +15,7 @@ use MyCLabs\Enum\Enum;
 /**
  * @psalm-immutable
  *
- * @extends Enum<string>
+ * @extends Enum<non-empty-string>
  */
 final class OrganizationType extends Enum
 {

@@ -15,13 +15,15 @@ use MyCLabs\Enum\Enum;
 /**
  * @psalm-immutable
  *
- * @extends Enum<string>
+ * @extends Enum<non-empty-string>
  */
 final class OrganizationBranchType extends Enum
 {
     private const MAIN = 'MAIN';
 
     private const BRANCH = 'BRANCH';
+
+    private const UNKNOWN = 'UNKNOWN';
 
     public static function main(): self
     {
@@ -31,5 +33,10 @@ final class OrganizationBranchType extends Enum
     public static function branch(): self
     {
         return new self(self::BRANCH);
+    }
+
+    public static function unknown(): self
+    {
+        return new self(self::UNKNOWN);
     }
 }

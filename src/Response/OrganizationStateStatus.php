@@ -15,7 +15,7 @@ use MyCLabs\Enum\Enum;
 /**
  * @psalm-immutable
  *
- * @extends Enum<string>
+ * @extends Enum<non-empty-string>
  */
 final class OrganizationStateStatus extends Enum
 {
@@ -28,6 +28,8 @@ final class OrganizationStateStatus extends Enum
     private const BANKRUPT = 'BANKRUPT';
 
     private const REORGANIZING = 'REORGANIZING';
+
+    private const UNKNOWN = 'UNKNOWN';
 
     public static function active(): self
     {
@@ -52,5 +54,10 @@ final class OrganizationStateStatus extends Enum
     public static function reorganizing(): self
     {
         return new self(self::REORGANIZING);
+    }
+
+    public static function unknown(): self
+    {
+        return new self(self::UNKNOWN);
     }
 }
