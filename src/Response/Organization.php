@@ -72,9 +72,9 @@ final class Organization
     private ?string $okfs;
 
     /**
-     * @var non-empty-string
+     * @var ?non-empty-string
      */
-    private string $okved;
+    private ?string $okved;
 
     private SuggestAddress $address;
 
@@ -95,7 +95,7 @@ final class Organization
      * @param ?numeric-string    $oktmo
      * @param ?numeric-string    $okogu
      * @param ?numeric-string    $okfs
-     * @param non-empty-string   $okved
+     * @param ?non-empty-string  $okved
      * @param ?list<PhoneNumber> $phones
      */
     public function __construct(
@@ -114,7 +114,7 @@ final class Organization
         ?string $oktmo,
         ?string $okogu,
         ?string $okfs,
-        string $okved,
+        ?string $okved,
         SuggestAddress $address,
         ?bool $invalid,
         ?array $phones
@@ -243,9 +243,9 @@ final class Organization
     }
 
     /**
-     * @return non-empty-string
+     * @return ?non-empty-string
      */
-    public function getOkved(): string
+    public function getOkved(): ?string
     {
         return $this->okved;
     }
