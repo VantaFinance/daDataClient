@@ -30,13 +30,13 @@ final class RestSuggestOrganizationClient implements SuggestOrganizationClient
         $this->client     = $client;
     }
 
-    public function findByInn(string $inn): array
+    public function findByInn(string $inn, int $count = 1): array
     {
         $request = new Request(
             Method::POST,
             '/suggestions/api/4_1/rs/findById/party',
             [],
-            $this->serializer->serialize(['query' => $inn], 'json')
+            $this->serializer->serialize(['query' => $inn, 'count' => $count], 'json')
         );
 
         $content = $this->client->sendRequest($request)->getBody()->__toString();

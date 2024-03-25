@@ -22,5 +22,5 @@ interface SuggestOrganizationClient
      *
      * @throws ClientException
      */
-    public function findByInn(string $inn): array;
+    public function findByInn(string $inn, int $count = 1): array;
 }
