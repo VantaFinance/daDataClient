@@ -52,4 +52,44 @@ final class OrganizationName
         $this->shortWithOpf = $shortWithOpf;
         $this->latin        = $latin;
     }
+
+    /**
+     * @return non-empty-string
+     */
+    public function getFull(): string
+    {
+        return $this->full;
+    }
+
+    /**
+     * @return non-empty-string
+     */
+    public function getFullWithOpf(): string
+    {
+        return $this->fullWithOpf;
+    }
+
+    /**
+     * @return ?non-empty-string
+     */
+    public function getShort(): ?string
+    {
+        return $this->short;
+    }
+
+    /**
+     * @return ?non-empty-string
+     */
+    public function getShortWithOpf(): ?string
+    {
+        return $this->shortWithOpf;
+    }
+
+    /**
+     * @return ?non-empty-string
+     */
+    public function getLatin(): ?string
+    {
+        return $this->latin;
+    }
 }

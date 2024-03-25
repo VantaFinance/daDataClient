@@ -140,6 +140,129 @@ final class Organization
         $this->invalid     = $invalid;
     }
 
+    /**
+     * @return non-empty-string
+     */
+    public function getHid(): string
+    {
+        return $this->hid;
+    }
+
+    public function getType(): OrganizationType
+    {
+        return $this->type;
+    }
+
+    public function getName(): OrganizationName
+    {
+        return $this->name;
+    }
+
+    public function getOpf(): OrganizationOpf
+    {
+        return $this->opf;
+    }
+
+    public function getState(): OrganizationState
+    {
+        return $this->state;
+    }
+
+    public function getBranchType(): ?OrganizationBranchType
+    {
+        return $this->branchType;
+    }
+
+    public function getBranchCount(): ?int
+    {
+        return $this->branchCount;
+    }
+
+    /**
+     * @return ?numeric-string
+     */
+    public function getKpp(): ?string
+    {
+        return $this->kpp;
+    }
+
+    /**
+     * @return numeric-string
+     */
+    public function getInn(): string
+    {
+        return $this->inn;
+    }
+
+    /**
+     * @return numeric-string
+     */
+    public function getOgrn(): string
+    {
+        return $this->ogrn;
+    }
+
+    /**
+     * @return numeric-string
+     */
+    public function getOkpo(): string
+    {
+        return $this->okpo;
+    }
+
+    /**
+     * @return numeric-string
+     */
+    public function getOkato(): string
+    {
+        return $this->okato;
+    }
+
+    /**
+     * @return numeric-string
+     */
+    public function getOktmo(): string
+    {
+        return $this->oktmo;
+    }
+
+    /**
+     * @return numeric-string
+     */
+    public function getOkogu(): string
+    {
+        return $this->okogu;
+    }
+
+    /**
+     * @return numeric-string
+     */
+    public function getOkfs(): string
+    {
+        return $this->okfs;
+    }
+
+    /**
+     * @return non-empty-string
+     */
+    public function getOkved(): string
+    {
+        return $this->okved;
+    }
+
+    public function getAddress(): SuggestAddress
+    {
+        return $this->address;
+    }
+
+    public function getInvalid(): ?bool
+    {
+        return $this->invalid;
+    }
+
+    /**
+     * @return list<PhoneNumber>
+     */
     public function getPhones(): array
     {
         return $this->phones;

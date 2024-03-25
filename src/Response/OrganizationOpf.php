@@ -45,4 +45,36 @@ final class OrganizationOpf
         $this->short = $short;
         $this->full  = $full;
     }
+
+    /**
+     * @return numeric-string
+     */
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return numeric-string
+     */
+    public function getCode(): string
+    {
+        return $this->code;
+    }
+
+    /**
+     * @return non-empty-string
+     */
+    public function getShort(): string
+    {
+        return $this->short;
+    }
+
+    /**
+     * @return non-empty-string
+     */
+    public function getFull(): string
+    {
+        return $this->full;
+    }
 }

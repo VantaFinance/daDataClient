@@ -18,4 +18,9 @@ final class OrganizationState
     {
         $this->status = $status;
     }
+
+    public function getStatus(): OrganizationStateStatus
+    {
+        return $this->status;
+    }
 }
