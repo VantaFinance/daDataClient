@@ -86,16 +86,16 @@ final class Organization
     private ?bool $invalid;
 
     /**
-     * @param non-empty-string $hid
-     * @param ?numeric-string $kpp
-     * @param numeric-string $inn
-     * @param numeric-string $ogrn
-     * @param numeric-string $okpo
-     * @param numeric-string $okato
-     * @param numeric-string $oktmo
-     * @param numeric-string $okogu
-     * @param numeric-string $okfs
-     * @param non-empty-string $okved
+     * @param non-empty-string   $hid
+     * @param ?numeric-string    $kpp
+     * @param numeric-string     $inn
+     * @param numeric-string     $ogrn
+     * @param numeric-string     $okpo
+     * @param numeric-string     $okato
+     * @param numeric-string     $oktmo
+     * @param numeric-string     $okogu
+     * @param numeric-string     $okfs
+     * @param non-empty-string   $okved
      * @param ?list<PhoneNumber> $phones
      */
     public function __construct(

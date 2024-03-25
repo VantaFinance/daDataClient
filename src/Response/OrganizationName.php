@@ -38,8 +38,8 @@ final class OrganizationName
     private ?string $latin;
 
     /**
-     * @param non-empty-string $full
-     * @param non-empty-string $fullWithOpf
+     * @param non-empty-string  $full
+     * @param non-empty-string  $fullWithOpf
      * @param ?non-empty-string $short
      * @param ?non-empty-string $shortWithOpf
      * @param ?non-empty-string $latin

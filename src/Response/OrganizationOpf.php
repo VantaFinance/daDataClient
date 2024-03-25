@@ -33,8 +33,8 @@ final class OrganizationOpf
     private string $full;
 
     /**
-     * @param numeric-string $type
-     * @param numeric-string $code
+     * @param numeric-string   $type
+     * @param numeric-string   $code
      * @param non-empty-string $short
      * @param non-empty-string $full
      */
