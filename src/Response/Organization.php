@@ -47,29 +47,29 @@ final class Organization
     private string $ogrn;
 
     /**
-     * @var numeric-string
+     * @var ?numeric-string
      */
-    private string $okpo;
+    private ?string $okpo;
 
     /**
-     * @var numeric-string
+     * @var ?numeric-string
      */
-    private string $okato;
+    private ?string $okato;
 
     /**
-     * @var numeric-string
+     * @var ?numeric-string
      */
-    private string $oktmo;
+    private ?string $oktmo;
 
     /**
-     * @var numeric-string
+     * @var ?numeric-string
      */
-    private string $okogu;
+    private ?string $okogu;
 
     /**
-     * @var numeric-string
+     * @var ?numeric-string
      */
-    private string $okfs;
+    private ?string $okfs;
 
     /**
      * @var non-empty-string
@@ -90,11 +90,11 @@ final class Organization
      * @param ?numeric-string    $kpp
      * @param numeric-string     $inn
      * @param numeric-string     $ogrn
-     * @param numeric-string     $okpo
-     * @param numeric-string     $okato
-     * @param numeric-string     $oktmo
-     * @param numeric-string     $okogu
-     * @param numeric-string     $okfs
+     * @param ?numeric-string    $okpo
+     * @param ?numeric-string    $okato
+     * @param ?numeric-string    $oktmo
+     * @param ?numeric-string    $okogu
+     * @param ?numeric-string    $okfs
      * @param non-empty-string   $okved
      * @param ?list<PhoneNumber> $phones
      */
@@ -109,11 +109,11 @@ final class Organization
         ?string $kpp,
         string $inn,
         string $ogrn,
-        string $okpo,
-        string $okato,
-        string $oktmo,
-        string $okogu,
-        string $okfs,
+        ?string $okpo,
+        ?string $okato,
+        ?string $oktmo,
+        ?string $okogu,
+        ?string $okfs,
         string $okved,
         SuggestAddress $address,
         ?bool $invalid,
@@ -203,41 +203,41 @@ final class Organization
     }
 
     /**
-     * @return numeric-string
+     * @return ?numeric-string
      */
-    public function getOkpo(): string
+    public function getOkpo(): ?string
     {
         return $this->okpo;
     }
 
     /**
-     * @return numeric-string
+     * @return ?numeric-string
      */
-    public function getOkato(): string
+    public function getOkato(): ?string
     {
         return $this->okato;
     }
 
     /**
-     * @return numeric-string
+     * @return ?numeric-string
      */
-    public function getOktmo(): string
+    public function getOktmo(): ?string
     {
         return $this->oktmo;
     }
 
     /**
-     * @return numeric-string
+     * @return ?numeric-string
      */
-    public function getOkogu(): string
+    public function getOkogu(): ?string
     {
         return $this->okogu;
     }
 
     /**
-     * @return numeric-string
+     * @return ?numeric-string
      */
-    public function getOkfs(): string
+    public function getOkfs(): ?string
     {
         return $this->okfs;
     }
