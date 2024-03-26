@@ -23,6 +23,8 @@ final class OrganizationType extends Enum
 
     private const LEGAL = 'LEGAL';
 
+    private const UNKNOWN = 'UNKNOWN';
+
     public static function individual(): self
     {
         return new self(self::INDIVIDUAL);
@@ -31,5 +33,10 @@ final class OrganizationType extends Enum
     public static function legal(): self
     {
         return new self(self::LEGAL);
+    }
+
+    public static function unknown(): self
+    {
+        return new self(self::UNKNOWN);
     }
 }
