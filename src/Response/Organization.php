@@ -136,7 +136,7 @@ final class Organization
         $this->okfs        = $okfs;
         $this->okved       = $okved;
         $this->address     = $address;
-        $this->phones      = array_filter($phones ?? []);
+        $this->phones      = array_values(array_filter($phones ?? [], static fn ($item) => $item instanceof PhoneNumber));
         $this->invalid     = $invalid;
     }
 
