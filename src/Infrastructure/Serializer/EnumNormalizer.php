@@ -11,8 +11,6 @@ declare(strict_types=1);
 namespace Vanta\Integration\DaData\Infrastructure\Serializer;
 
 use MyCLabs\Enum\Enum;
-use Symfony\Component\PropertyInfo\Type;
-use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface as Denormalizer;
 
@@ -35,7 +33,7 @@ final class EnumNormalizer implements Denormalizer
     }
 
     /**
-     * @psalm-suppress InvalidArgument,MoreSpecificImplementedParamType, MethodSignatureMismatch, ImplementedReturnTypeMismatch
+     * @psalm-suppress InvalidArgument, MoreSpecificImplementedParamType, MethodSignatureMismatch, ImplementedReturnTypeMismatch
      *
      * @template T
      *
@@ -47,23 +45,13 @@ final class EnumNormalizer implements Denormalizer
      */
     public function denormalize($data, string $type, ?string $format = null, array $context = []): Enum
     {
-        if (!$type::isValid($data)) {
-            throw NotNormalizableValueException::createForUnexpectedDataType(
-                sprintf(
-                    'Ожидали enum: %s, получили: %s',
-                    $type::toArray(),
-                    get_debug_type($type)
-                ),
-                $data,
-                [Type::BUILTIN_TYPE_STRING],
-                $context['deserialization_path'] ?? null,
-                true
-            );
-        }
-
         try {
             return new $type($data);
         } catch (\UnexpectedValueException $e) {
+            if ($type::isValid('UNKNOWN')) {
+                return new $type('UNKNOWN');
+            }
+
             throw new UnexpectedValueException($e->getMessage(), 0, $e);
         }
     }

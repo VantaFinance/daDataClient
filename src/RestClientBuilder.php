@@ -42,8 +42,10 @@ use Vanta\Integration\DaData\Infrastructure\Serializer\CountryIsoNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\EnumNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\FiasActualityStateNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\MoneyNormalizer;
+use Vanta\Integration\DaData\Infrastructure\Serializer\PhoneNumberNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\RegionIsoNormalizer;
 use Vanta\Integration\DaData\Transport\RestSuggestAddressClient;
+use Vanta\Integration\DaData\Transport\RestSuggestOrganizationClient;
 
 final class RestClientBuilder
 {
@@ -97,11 +99,12 @@ final class RestClientBuilder
             new RegionIsoNormalizer(),
             new FiasActualityStateNormalizer(),
             new MoneyNormalizer(),
-            new EnumNormalizer(),
             new CountryIsoNormalizer(),
             new UnwrappingDenormalizer(),
             new DateTimeNormalizer(),
             new UidNormalizer(),
+            new PhoneNumberNormalizer(),
+            new EnumNormalizer(),
             new ObjectNormalizer(
                 $classMetadataFactory,
                 new MetadataAwareNameConverter($classMetadataFactory, new CamelCaseToSnakeCaseNameConverter()),
@@ -169,6 +172,20 @@ final class RestClientBuilder
     public function createSuggestAddressClient(string $url = 'https://suggestions.dadata.ru'): SuggestAddressClient
     {
         return new RestSuggestAddressClient(
+            $this->serializer,
+            new HttpClient(
+                new ConfigurationClient($this->apiKey, $this->secretKey, $url),
+                new PipelineMiddleware($this->middlewares, $this->client)
+            )
+        );
+    }
+
+    /**
+     * @param non-empty-string $url
+     */
+    public function createSuggestOrganizationClient(string $url = 'https://suggestions.dadata.ru'): SuggestOrganizationClient
+    {
+        return new RestSuggestOrganizationClient(
             $this->serializer,
             new HttpClient(
                 new ConfigurationClient($this->apiKey, $this->secretKey, $url),
