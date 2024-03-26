@@ -42,7 +42,7 @@ final class PhoneNumberNormalizer implements Normalizer, Denormalizer
      *
      * @param array{deserialization_path?: non-empty-string} $context
      */
-    public function denormalize($data, string $type, ?string $format = null, array $context = []): PhoneNumber
+    public function denormalize($data, string $type, ?string $format = null, array $context = []): ?PhoneNumber
     {
         if (!\is_array($data)) {
             throw NotNormalizableValueException::createForUnexpectedDataType(
@@ -80,13 +80,7 @@ final class PhoneNumberNormalizer implements Normalizer, Denormalizer
         try {
             return PhoneNumber::parse($data);
         } catch (PhoneNumberParseException $e) {
-            throw NotNormalizableValueException::createForUnexpectedDataType(
-                $e->getMessage(),
-                $data,
-                [Type::BUILTIN_TYPE_INT, Type::BUILTIN_TYPE_STRING],
-                $context['deserialization_path'] ?? null,
-                true
-            );
+            return null;
         }
     }
 

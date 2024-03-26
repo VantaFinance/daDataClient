@@ -23,7 +23,7 @@ final class Organization
 
     private OrganizationName $name;
 
-    private OrganizationOpf $opf;
+    private ?OrganizationOpf $opf;
 
     private OrganizationState $state;
 
@@ -42,9 +42,9 @@ final class Organization
     private string $inn;
 
     /**
-     * @var numeric-string
+     * @var ?numeric-string
      */
-    private string $ogrn;
+    private ?string $ogrn;
 
     /**
      * @var ?numeric-string
@@ -76,7 +76,7 @@ final class Organization
      */
     private ?string $okved;
 
-    private SuggestAddress $address;
+    private ?SuggestAddress $address;
 
     /**
      * @var list<PhoneNumber>
@@ -89,7 +89,7 @@ final class Organization
      * @param non-empty-string   $hid
      * @param ?numeric-string    $kpp
      * @param numeric-string     $inn
-     * @param numeric-string     $ogrn
+     * @param ?numeric-string    $ogrn
      * @param ?numeric-string    $okpo
      * @param ?numeric-string    $okato
      * @param ?numeric-string    $oktmo
@@ -102,20 +102,20 @@ final class Organization
         string $hid,
         OrganizationType $type,
         OrganizationName $name,
-        OrganizationOpf $opf,
+        ?OrganizationOpf $opf,
         OrganizationState $state,
         ?OrganizationBranchType $branchType,
         ?int $branchCount,
         ?string $kpp,
         string $inn,
-        string $ogrn,
+        ?string $ogrn,
         ?string $okpo,
         ?string $okato,
         ?string $oktmo,
         ?string $okogu,
         ?string $okfs,
         ?string $okved,
-        SuggestAddress $address,
+        ?SuggestAddress $address,
         ?bool $invalid,
         ?array $phones
     ) {
@@ -136,7 +136,7 @@ final class Organization
         $this->okfs        = $okfs;
         $this->okved       = $okved;
         $this->address     = $address;
-        $this->phones      = $phones ?? [];
+        $this->phones      = array_filter($phones ?? []);
         $this->invalid     = $invalid;
     }
 
@@ -158,7 +158,7 @@ final class Organization
         return $this->name;
     }
 
-    public function getOpf(): OrganizationOpf
+    public function getOpf(): ?OrganizationOpf
     {
         return $this->opf;
     }
@@ -195,9 +195,9 @@ final class Organization
     }
 
     /**
-     * @return numeric-string
+     * @return ?numeric-string
      */
-    public function getOgrn(): string
+    public function getOgrn(): ?string
     {
         return $this->ogrn;
     }
@@ -250,7 +250,7 @@ final class Organization
         return $this->okved;
     }
 
-    public function getAddress(): SuggestAddress
+    public function getAddress(): ?SuggestAddress
     {
         return $this->address;
     }
