@@ -11,8 +11,6 @@ declare(strict_types=1);
 namespace Vanta\Integration\DaData\Infrastructure\Serializer;
 
 use MyCLabs\Enum\Enum;
-use Symfony\Component\PropertyInfo\Type;
-use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface as Denormalizer;
 
