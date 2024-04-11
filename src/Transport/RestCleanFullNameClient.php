@@ -9,6 +9,7 @@ use Psr\Http\Client\ClientInterface as HttpClient;
 use Symfony\Component\Serializer\SerializerInterface as Serializer;
 use Vanta\Integration\DaData\CleanFullNameClient;
 use Vanta\Integration\DaData\Response\CleanedFullName;
+use Vanta\Integration\DaData\Response\SuggestAddress;
 use Yiisoft\Http\Method;
 
 final class RestCleanFullNameClient implements CleanFullNameClient
@@ -34,6 +35,9 @@ final class RestCleanFullNameClient implements CleanFullNameClient
 
         $content = $this->client->sendRequest($request)->getBody()->__toString();
 
-        return $this->serializer->deserialize($content, CleanedFullName::class . '[]', 'json');
+        /** @var list<SuggestAddress> $value */
+        $value = $this->serializer->deserialize($content, CleanedFullName::class . '[]', 'json');
+
+        return $value;
     }
 }
