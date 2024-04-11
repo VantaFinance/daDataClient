@@ -12,7 +12,9 @@ interface CleanFullNameClient
     /**
      * @param non-empty-string $fullName - surname, name, patronymic
      *
+     * @return list<CleanedFullName>
+     *
      * @throws ClientException
      */
-    public function clean(string $fullName): CleanedFullName;
+    public function clean(string $fullName): array;
 }

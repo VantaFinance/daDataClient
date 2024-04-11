@@ -6,7 +6,6 @@ namespace Vanta\Integration\DaData\Transport;
 
 use GuzzleHttp\Psr7\Request;
 use Psr\Http\Client\ClientInterface as HttpClient;
-use Symfony\Component\Serializer\Normalizer\UnwrappingDenormalizer;
 use Symfony\Component\Serializer\SerializerInterface as Serializer;
 use Vanta\Integration\DaData\CleanFullNameClient;
 use Vanta\Integration\DaData\Response\CleanedFullName;
@@ -24,7 +23,7 @@ final class RestCleanFullNameClient implements CleanFullNameClient
         $this->client     = $client;
     }
 
-    public function clean(string $fullName): CleanedFullName
+    public function clean(string $fullName): array
     {
         $request = new Request(
             Method::POST,
@@ -35,11 +34,6 @@ final class RestCleanFullNameClient implements CleanFullNameClient
 
         $content = $this->client->sendRequest($request)->getBody()->__toString();
 
-        /** @var CleanedFullName $value */
-        $value = $this->serializer->deserialize($content, CleanedFullName::class, 'json', [
-            UnwrappingDenormalizer::UNWRAP_PATH => '[0]',
-        ]);
-
-        return $value;
+        return $this->serializer->deserialize($content, CleanedFullName::class . '[]', 'json');
     }
 }

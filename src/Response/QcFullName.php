@@ -9,7 +9,7 @@ use MyCLabs\Enum\Enum;
 /**
  * @psalm-immutable
  *
- * @extends Enum<integer>
+ * @extends Enum<non-negative-int>
  */
 final class QcFullName extends Enum
 {
