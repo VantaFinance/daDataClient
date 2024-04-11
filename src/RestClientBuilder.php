@@ -44,6 +44,7 @@ use Vanta\Integration\DaData\Infrastructure\Serializer\FiasActualityStateNormali
 use Vanta\Integration\DaData\Infrastructure\Serializer\MoneyNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\PhoneNumberNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\RegionIsoNormalizer;
+use Vanta\Integration\DaData\Transport\RestCleanFullNameClient;
 use Vanta\Integration\DaData\Transport\RestSuggestAddressClient;
 use Vanta\Integration\DaData\Transport\RestSuggestOrganizationClient;
 
@@ -164,6 +165,20 @@ final class RestClientBuilder
     public function withClient(PsrHttpClient $client): self
     {
         return new self($client, $this->serializer, $this->apiKey, $this->secretKey, $this->middlewares);
+    }
+
+    /**
+     * @param non-empty-string $url
+     */
+    public function createCleanFullNameClient(string $url = 'https://cleaner.dadata.ru'): CleanFullNameClient
+    {
+        return new RestCleanFullNameClient(
+            $this->serializer,
+            new HttpClient(
+                new ConfigurationClient($this->apiKey, $this->secretKey, $url),
+                new PipelineMiddleware($this->middlewares, $this->client)
+            )
+        );
     }
 
     /**
