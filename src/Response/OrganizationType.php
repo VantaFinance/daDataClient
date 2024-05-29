@@ -19,10 +19,19 @@ use MyCLabs\Enum\Enum;
  */
 final class OrganizationType extends Enum
 {
+    /**
+     * @type non-empty-string
+     */
     private const INDIVIDUAL = 'INDIVIDUAL';
 
+    /**
+     * @type non-empty-string
+     */
     private const LEGAL = 'LEGAL';
 
+    /**
+     * @type non-empty-string
+     */
     private const UNKNOWN = 'UNKNOWN';
 
     public static function individual(): self
