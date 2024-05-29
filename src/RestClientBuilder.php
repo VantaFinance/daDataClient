@@ -46,6 +46,7 @@ use Vanta\Integration\DaData\Infrastructure\Serializer\PhoneNumberNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\RegionIsoNormalizer;
 use Vanta\Integration\DaData\Transport\RestCleanFullNameClient;
 use Vanta\Integration\DaData\Transport\RestSuggestAddressClient;
+use Vanta\Integration\DaData\Transport\RestSuggestFullNameClient;
 use Vanta\Integration\DaData\Transport\RestSuggestOrganizationClient;
 
 final class RestClientBuilder
@@ -201,6 +202,20 @@ final class RestClientBuilder
     public function createSuggestOrganizationClient(string $url = 'https://suggestions.dadata.ru'): SuggestOrganizationClient
     {
         return new RestSuggestOrganizationClient(
+            $this->serializer,
+            new HttpClient(
+                new ConfigurationClient($this->apiKey, $this->secretKey, $url),
+                new PipelineMiddleware($this->middlewares, $this->client)
+            )
+        );
+    }
+
+    /**
+     * @param non-empty-string $url
+     */
+    public function createSuggestFullNameClient(string $url = 'https://suggestions.dadata.ru'): RestSuggestFullNameClient
+    {
+        return new RestSuggestFullNameClient(
             $this->serializer,
             new HttpClient(
                 new ConfigurationClient($this->apiKey, $this->secretKey, $url),
