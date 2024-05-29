@@ -38,7 +38,6 @@ final class FullName
      * @param non-empty-string|null $surname
      * @param non-empty-string|null $name
      * @param non-empty-string|null $patronymic
-     * @param Gender                $gender
      */
     public function __construct(
         ?string $source,
@@ -57,9 +56,9 @@ final class FullName
     }
 
     /**
-     * @return non-empty-string
+     * @return non-empty-string|null
      */
-    public function getSource(): string
+    public function getSource(): ?string
     {
         return $this->source;
     }

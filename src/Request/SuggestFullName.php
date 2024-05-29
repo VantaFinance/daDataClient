@@ -21,6 +21,7 @@ final class SuggestFullName
 
     /**
      * @param non-empty-string $query
+     * @param positive-int     $count
      */
     public function __construct(string $query, int $count = 1)
     {
