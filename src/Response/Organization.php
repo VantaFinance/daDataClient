@@ -25,6 +25,8 @@ final class Organization
 
     private ?OrganizationOpf $opf;
 
+    private Management $management;
+
     private OrganizationState $state;
 
     private ?OrganizationBranchType $branchType;
@@ -103,6 +105,7 @@ final class Organization
         OrganizationType $type,
         OrganizationName $name,
         ?OrganizationOpf $opf,
+        Management $management,
         OrganizationState $state,
         ?OrganizationBranchType $branchType,
         ?int $branchCount,
@@ -123,6 +126,7 @@ final class Organization
         $this->type        = $type;
         $this->name        = $name;
         $this->opf         = $opf;
+        $this->management  = $management;
         $this->state       = $state;
         $this->branchType  = $branchType;
         $this->branchCount = $branchCount;
@@ -161,6 +165,11 @@ final class Organization
     public function getOpf(): ?OrganizationOpf
     {
         return $this->opf;
+    }
+
+    public function getManagement(): Management
+    {
+        return $this->management;
     }
 
     public function getState(): OrganizationState
