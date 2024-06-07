@@ -12,15 +12,15 @@ final class Management
     private string $name;
 
     /**
-     * @var non-empty-string
+     * @var non-empty-string|null
      */
-    private string $post;
+    private ?string $post;
 
     /**
      * @param non-empty-string $name
-     * @param non-empty-string $post
+     * @param non-empty-string|null $post
      */
-    public function __construct(string $name, string $post)
+    public function __construct(string $name, ?string $post)
     {
         $this->name = $name;
         $this->post = $post;
@@ -35,9 +35,9 @@ final class Management
     }
 
     /**
-     * @return non-empty-string
+     * @return non-empty-string|null
      */
-    public function getPost(): string
+    public function getPost(): ?string
     {
         return $this->post;
     }
