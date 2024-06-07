@@ -17,7 +17,7 @@ final class Management
     private ?string $post;
 
     /**
-     * @param non-empty-string $name
+     * @param non-empty-string      $name
      * @param non-empty-string|null $post
      */
     public function __construct(string $name, ?string $post)
