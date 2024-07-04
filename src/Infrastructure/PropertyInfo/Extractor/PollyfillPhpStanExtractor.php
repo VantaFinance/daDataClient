@@ -262,6 +262,20 @@ final class PollyfillPhpStanExtractor implements PropertyTypeExtractorInterface,
         return [$phpDocNode, $source, $reflectionProperty->class];
     }
 
+    public function getTypeFromConstructor(string $class, string $property): ?\Symfony\Component\TypeInfo\Type
+    {
+        return null;
+    }
+
+
+    /**
+     * @param array<string, mixed> $context
+     */
+    public function getType(string $class, string $property, array $context = []): ?\Symfony\Component\TypeInfo\Type
+    {
+        return null;
+    }
+
     /**
      * @return array{PhpDocNode, string, string}|null
      */
