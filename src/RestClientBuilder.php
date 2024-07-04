@@ -91,10 +91,16 @@ final class RestClientBuilder
     public static function create(PsrHttpClient $client, ?string $apiKey = null, ?string $secretKey = null): self
     {
         $classMetadataFactory = new ClassMetadataFactory(new LoaderChain([]));
-        $phpStanExtractor     = new PollyfillPhpStanExtractor();
+        $typeExtractors       = [];
 
+        /* @infection-ignore-all */
+        if (isOldPackage('symfony/property-info', '6.1')) {
+            $typeExtractors[] = new PollyfillPhpStanExtractor();
+        }
+
+        /* @infection-ignore-all */
         if (!isOldPackage('symfony/property-info', '6.1')) {
-            $phpStanExtractor = new PhpStanExtractor();
+            $typeExtractors[] = new PhpStanExtractor();
         }
 
         $serializer = new SymfonySerializer([
@@ -113,7 +119,7 @@ final class RestClientBuilder
                 null,
                 new PropertyInfoExtractor(
                     [],
-                    [$phpStanExtractor],
+                    $typeExtractors,
                     [],
                     [],
                     [],
