@@ -87,7 +87,7 @@ final class RestClientBuilder
     public static function create(PsrHttpClient $client, ?string $apiKey = null, ?string $secretKey = null): self
     {
         $classMetadataFactory = new ClassMetadataFactory(new LoaderChain([]));
-        $phpStanExtractor = null;
+        $phpStanExtractor     = null;
 
         /* @infection-ignore-all */
         if (isOldPackage('symfony/property-info', '6.1')) {

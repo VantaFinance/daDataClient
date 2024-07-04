@@ -267,7 +267,6 @@ final class PollyfillPhpStanExtractor implements PropertyTypeExtractorInterface,
         return null;
     }
 
-
     /**
      * @param array<string, mixed> $context
      */
