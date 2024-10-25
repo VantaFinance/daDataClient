@@ -39,12 +39,12 @@
         "moneyphp/money": "^3.0|^4.0",
         "myclabs/php-enum": "^1.8",
         "composer/semver": "^3.3",
-        "brick/phonenumber": "^0.4"
+        "brick/phonenumber": "^0.4|^0.5|^0.6"
     },
     "require-dev": {
         "symfony/http-client": "^5.3|^5.4|^6.0|^7.0",
         "symfony/var-dumper": "^5.3|^5.4|^6.0|^7.0",
-        "friendsofphp/php-cs-fixer": "^3.51",
+        "friendsofphp/php-cs-fixer": "^3.64",
         "vimeo/psalm": "^5.23",
         "psalm/plugin-symfony": "^5.1",
         "guzzlehttp/guzzle": "^7.7"
