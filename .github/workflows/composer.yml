@@ -22,7 +22,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: [ 7.4, 8.0, 8.1, 8.2 ]
+        php: [ 8.1, 8.2 ]
+        symfony: [ '6.4.*', '7.1.*' ]
     steps:
       - uses: actions/checkout@v3.3.0
 
@@ -30,11 +31,14 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          tools: composer:v2
+          tools: composer:v2, flex
           coverage: none
 
       - name: Install Dependence and audit
+        env:
+          SYMFONY_REQUIRE: ${{ matrix.symfony }}
         uses: ramsey/composer-install@v2
         with:
           composer-options: --optimize-autoloader
+          dependency-versions: "highest"
       - run: composer audit
