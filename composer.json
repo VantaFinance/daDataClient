@@ -45,8 +45,8 @@
         "symfony/http-client": "^5.3|^5.4|^6.0|^7.0",
         "symfony/var-dumper": "^5.3|^5.4|^6.0|^7.0",
         "friendsofphp/php-cs-fixer": "*",
-        "vimeo/psalm": "^5.23",
-        "psalm/plugin-symfony": "^5.1",
+        "vimeo/psalm": "*",
+        "psalm/plugin-symfony": "*",
         "guzzlehttp/guzzle": "^7.7"
     },
     "config": {
