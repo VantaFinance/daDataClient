@@ -22,11 +22,10 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        include:
-          - php: [ 7.4, 8.0, 8.1, 8.2 ]
-            symfony: [ '5.4.*', '6.4.*', ]
-          - php: [ 8.2 ]
-            symfony: [ '7.1.*', '7.2.*' ]
+        - php: [ 7.4, 8.0, 8.1, 8.2 ]
+          symfony: [ '5.4.*', '6.4.*', ]
+        - php: [ 8.2 ]
+          symfony: [ '7.1.*', '7.2.*' ]
 
     steps:
       - uses: actions/checkout@v3.3.0
