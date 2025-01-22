@@ -42,11 +42,11 @@
         "brick/phonenumber": "^0.4|^0.5|^0.6"
     },
     "require-dev": {
-        "symfony/http-client": "*",
+        "symfony/http-client": "^5.3|^5.4|^6.0|^7.0",
         "symfony/var-dumper": "^5.3|^5.4|^6.0|^7.0",
-        "friendsofphp/php-cs-fixer": "*",
-        "vimeo/psalm": "*",
-        "psalm/plugin-symfony": "*",
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "vimeo/psalm": "^5.23",
+        "psalm/plugin-symfony": "^5.1",
         "guzzlehttp/guzzle": "^7.7"
     },
     "config": {
