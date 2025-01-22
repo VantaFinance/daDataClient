@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        [
+        data: [
           { php: 7.4, symfony: '5.4.*' }, { php: 7.4, symfony: '6.4.*' },
           { php: 8.0, symfony: '5.4.*' }, { php: 8.0, symfony: '6.4.*' },
           { php: 8.1, symfony: '5.4.*' }, { php: 8.1, symfony: '6.4.*' },
@@ -37,13 +37,13 @@ jobs:
       - name: Install Infrastructure
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: ${{ matrix.data.php }}
           tools: composer:v2, flex
           coverage: none
 
       - name: Install Dependence and audit
         env:
-          SYMFONY_REQUIRE: ${{ matrix.symfony }}
+          SYMFONY_REQUIRE: ${{ matrix.data.symfony }}
         uses: ramsey/composer-install@v2
         with:
           composer-options: --optimize-autoloader
