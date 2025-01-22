@@ -39,6 +39,6 @@ jobs:
           SYMFONY_REQUIRE: ${{ matrix.symfony }}
         uses: ramsey/composer-install@v2
         with:
-          composer-options: --optimize-autoloader --no-dev
+          composer-options: --optimize-autoloader
           dependency-versions: "highest"
       - run: composer audit
