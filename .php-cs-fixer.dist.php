@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PosCredit MDM-Client
  *

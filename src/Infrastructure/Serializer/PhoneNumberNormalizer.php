@@ -1,4 +1,5 @@
 <?php
+
 /**
  * DaData Client
  *
@@ -93,7 +94,7 @@ final class PhoneNumberNormalizer implements Normalizer, Denormalizer
     }
 
     /**
-     * @psalm-suppress MoreSpecificImplementedParamType, LessSpecificReturnStatement, MoreSpecificReturnType
+     * @psalm-suppress MoreSpecificImplementedParamType, LessSpecificReturnStatement, MoreSpecificReturnType, ParamNameMismatch
      *
      * @param object               $object
      * @param array<string, mixed> $context

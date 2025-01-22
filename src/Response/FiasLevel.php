@@ -41,6 +41,10 @@ final class FiasLevel extends Enum
 
     private const LAND_PLOT = '75';
 
+    private const ADDITIONAL_TERRITORY = '90';
+
+    private const STREET_IN_ADDITIONAL_TERRITORY = '91';
+
     private const FOREIGN_OR_BLANK = '-1';
 
     public static function country(): self
@@ -96,6 +100,16 @@ final class FiasLevel extends Enum
     public static function landPlot(): self
     {
         return new self(self::LAND_PLOT);
+    }
+
+    public static function additionalTerritory(): self
+    {
+        return new self(self::ADDITIONAL_TERRITORY);
+    }
+
+    public static function streetInAdditionalTerritory(): self
+    {
+        return new self(self::STREET_IN_ADDITIONAL_TERRITORY);
     }
 
     public static function foreignOrBlank(): self

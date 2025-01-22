@@ -1,4 +1,5 @@
 <?php
+
 /**
  * DaData Client
  *
@@ -100,6 +101,9 @@ final class MoneyNormalizer implements Normalizer, Denormalizer
         return $data instanceof Money;
     }
 
+    /**
+     * @psalm-suppress ParamNameMismatch
+     */
     public function normalize($object, ?string $format = null, array $context = []): string
     {
         if (!$object instanceof Money) {
