@@ -1,4 +1,5 @@
 <?php
+
 /**
  * DaData Client
  *
@@ -36,7 +37,7 @@ final class FiasActualityStateNormalizer implements Normalizer, Denormalizer
     }
 
     /**
-     * @psalm-suppress MoreSpecificImplementedParamType
+     * @psalm-suppress MoreSpecificImplementedParamType, ParamNameMismatch
      *
      * @param object               $object
      * @param array<string, mixed> $context
