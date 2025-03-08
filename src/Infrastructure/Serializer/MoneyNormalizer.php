@@ -78,7 +78,7 @@ final class MoneyNormalizer implements Normalizer, Denormalizer
         }
 
         $moneyParser = new DecimalMoneyParser(new ISOCurrencies());
-        $money       = new Money($moneyParser->parse($data, new Currency('RUB'))->getAmount(), new Currency('NON'));
+        $money       = new Money($moneyParser->parse($data, new Currency('RUB'))->getAmount(), new Currency('RUB'));
 
         try {
             return $money;
