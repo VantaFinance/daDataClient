@@ -28,6 +28,7 @@ use Symfony\Component\Serializer\Normalizer\UnwrappingDenormalizer;
 use Symfony\Component\Serializer\Serializer as SymfonySerializer;
 use Symfony\Component\Serializer\SerializerInterface as Serializer;
 
+use Vanta\Integration\DaData\Transport\RestCleanAddressClient;
 use function Vanta\Integration\DaData\Infrastructure\Composer\isOldPackage;
 
 use Vanta\Integration\DaData\Infrastructure\HttpClient\ConfigurationClient;
@@ -223,6 +224,20 @@ final class RestClientBuilder
     public function createSuggestFullNameClient(string $url = 'https://suggestions.dadata.ru'): RestSuggestFullNameClient
     {
         return new RestSuggestFullNameClient(
+            $this->serializer,
+            new HttpClient(
+                new ConfigurationClient($this->apiKey, $this->secretKey, $url),
+                new PipelineMiddleware($this->middlewares, $this->client)
+            )
+        );
+    }
+
+    /**
+     * @param non-empty-string $url
+     */
+    public function createCleanAddressClient(string $url = 'https://cleaner.dadata.ru'): CleanAddressClient
+    {
+        return new RestCleanAddressClient(
             $this->serializer,
             new HttpClient(
                 new ConfigurationClient($this->apiKey, $this->secretKey, $url),
