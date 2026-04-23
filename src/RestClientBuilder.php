@@ -28,6 +28,8 @@ use Symfony\Component\Serializer\Normalizer\UnwrappingDenormalizer;
 use Symfony\Component\Serializer\Serializer as SymfonySerializer;
 use Symfony\Component\Serializer\SerializerInterface as Serializer;
 
+use Vanta\Integration\DaData\Infrastructure\Serializer\CapitalMarkerNormalizer;
+use Vanta\Integration\DaData\Infrastructure\Serializer\QcGeoNormalizer;
 use Vanta\Integration\DaData\Transport\RestCleanAddressClient;
 use function Vanta\Integration\DaData\Infrastructure\Composer\isOldPackage;
 
@@ -110,6 +112,8 @@ final class RestClientBuilder
             new FiasActualityStateNormalizer(),
             new MoneyNormalizer(),
             new CountryIsoNormalizer(),
+            new QcGeoNormalizer(),
+            new CapitalMarkerNormalizer(),
             new UnwrappingDenormalizer(),
             new DateTimeNormalizer(),
             new UidNormalizer(),
