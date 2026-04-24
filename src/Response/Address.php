@@ -351,6 +351,11 @@ final class Address
     private array $historyValues;
 
     /**
+     * @var non-empty-string|null
+     */
+    private ?string $result;
+
+    /**
      * @param numeric-string|null          $postalCode
      * @param non-empty-string|null        $federalDistrict
      * @param non-empty-string|null        $cityArea
@@ -409,7 +414,8 @@ final class Address
      * @param numeric-string|null          $geoLat
      * @param numeric-string|null          $geoLon
      * @param array<int, Metro>            $metro
-     * @param array<int, non-empty-string> $historyValues
+     * @param array<int, non-empty-string> $historyValues,
+     * @param non-empty-string|null        $result
      */
     public function __construct(
         ?string $postalCode,
@@ -488,7 +494,8 @@ final class Address
         ?string $geoLat,
         ?string $geoLon,
         ?array $metro = [],
-        ?array $historyValues = []
+        ?array $historyValues = [],
+        ?string $result = null
     ) {
         $this->postalCode           = $postalCode;
         $this->federalDistrict      = $federalDistrict;
@@ -567,6 +574,7 @@ final class Address
         $this->geoLon               = $geoLon;
         $this->metro                = $metro ?? [];
         $this->historyValues        = $historyValues ?? [];
+        $this->result               = $result;
     }
 
     /**
@@ -1129,5 +1137,13 @@ final class Address
     public function getHistoryValues(): array
     {
         return $this->historyValues;
+    }
+
+    /**
+     * @return non-empty-string|null
+     */
+    public function getResult(): ?string
+    {
+        return $this->result;
     }
 }
