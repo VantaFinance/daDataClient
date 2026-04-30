@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Vanta\Integration\DaData\Infrastructure\Serializer;
 
+use Symfony\Component\PropertyInfo\Type;
+use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface as Denormalizer;
 use Vanta\Integration\DaData\Response\CapitalMarker;
 
@@ -34,9 +36,41 @@ final class CapitalMarkerNormalizer implements Denormalizer
 
     /**
      * @psalm-suppress MissingParamType, MethodSignatureMismatch
+     *
+     * @param array{deserialization_path?: non-empty-string} $context
      */
     public function denormalize($data, string $type, ?string $format = null, array $context = []): CapitalMarker
     {
-        return new CapitalMarker((string) $data);
+        if (!\is_string($data)) {
+            throw NotNormalizableValueException::createForUnexpectedDataType(
+                sprintf('Ожидали строку, получили: %s.', get_debug_type($data)),
+                $data,
+                [Type::BUILTIN_TYPE_STRING],
+                $context['deserialization_path'] ?? null,
+                true
+            );
+        }
+
+        if (!is_numeric($data)) {
+            throw NotNormalizableValueException::createForUnexpectedDataType(
+                'Ожидали число в виде строки',
+                $data,
+                [Type::BUILTIN_TYPE_STRING],
+                $context['deserialization_path'] ?? null,
+                true
+            );
+        }
+
+        try {
+            return new CapitalMarker($data);
+        } catch (\InvalidArgumentException $e) {
+            throw NotNormalizableValueException::createForUnexpectedDataType(
+                $e->getMessage(),
+                $data,
+                [Type::BUILTIN_TYPE_STRING],
+                $context['deserialization_path'] ?? null,
+                true
+            );
+        }
     }
 }
