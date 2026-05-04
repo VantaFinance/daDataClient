@@ -41,9 +41,7 @@ final class RestCleanAddressClient implements CleanAddressClient
 
         $content = $this->client->sendRequest($request)->getBody()->__toString();
 
-        /** @var list<Address> $value */
-        $value = $this->serializer->deserialize($content, Address::class . '[]', 'json');
-
-        return $value;
+        /* @var list<Address> $results */
+        return $this->serializer->deserialize($content, Address::class . '[]', 'json');
     }
 }

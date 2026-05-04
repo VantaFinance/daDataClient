@@ -14,7 +14,6 @@ namespace Vanta\Integration\DaData\Infrastructure\Serializer;
 use Brick\PhoneNumber\PhoneNumber;
 use Brick\PhoneNumber\PhoneNumberFormat;
 use Brick\PhoneNumber\PhoneNumberParseException;
-use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface as Denormalizer;
@@ -49,7 +48,7 @@ final class PhoneNumberNormalizer implements Normalizer, Denormalizer
             throw NotNormalizableValueException::createForUnexpectedDataType(
                 sprintf('Ожидали массив, получили:%s.', get_debug_type($data)),
                 $data,
-                [Type::BUILTIN_TYPE_STRING],
+                ['string'],
                 $context['deserialization_path'] ?? null,
                 true
             );
@@ -59,7 +58,7 @@ final class PhoneNumberNormalizer implements Normalizer, Denormalizer
             throw NotNormalizableValueException::createForUnexpectedDataType(
                 'Ожидали массив с ключом value',
                 $data,
-                [Type::BUILTIN_TYPE_STRING],
+                ['string'],
                 $context['deserialization_path'] ?? null,
                 true
             );
@@ -72,7 +71,7 @@ final class PhoneNumberNormalizer implements Normalizer, Denormalizer
             throw NotNormalizableValueException::createForUnexpectedDataType(
                 'Ожидали не пустую строку',
                 $data,
-                [Type::BUILTIN_TYPE_STRING],
+                ['string'],
                 $context['deserialization_path'] ?? null,
                 true
             );

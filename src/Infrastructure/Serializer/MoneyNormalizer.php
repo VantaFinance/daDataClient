@@ -16,7 +16,6 @@ use Money\Currency;
 use Money\Formatter\DecimalMoneyFormatter;
 use Money\Money;
 use Money\Parser\DecimalMoneyParser;
-use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface as Denormalizer;
@@ -33,7 +32,7 @@ final class MoneyNormalizer implements Normalizer, Denormalizer
     }
 
     /**
-     * @psalm-suppress MissingParamType
+     * @psalm-suppress MissingParamType, MethodSignatureMismatch
      */
     public function supportsDenormalization($data, string $type, ?string $format = null, array $context = []): bool
     {
@@ -51,7 +50,7 @@ final class MoneyNormalizer implements Normalizer, Denormalizer
             throw NotNormalizableValueException::createForUnexpectedDataType(
                 sprintf('Ожидали строку,получили:%s.', get_debug_type($data)),
                 $data,
-                [Type::BUILTIN_TYPE_STRING],
+                ['string'],
                 $context['deserialization_path'] ?? null,
                 true
             );
@@ -61,7 +60,7 @@ final class MoneyNormalizer implements Normalizer, Denormalizer
             throw NotNormalizableValueException::createForUnexpectedDataType(
                 'Ожидали не пустую строку',
                 $data,
-                [Type::BUILTIN_TYPE_STRING],
+                ['string'],
                 $context['deserialization_path'] ?? null,
                 true
             );
@@ -71,7 +70,7 @@ final class MoneyNormalizer implements Normalizer, Denormalizer
             throw NotNormalizableValueException::createForUnexpectedDataType(
                 'Ожидали число в виде строки',
                 $data,
-                [Type::BUILTIN_TYPE_STRING],
+                ['string'],
                 $context['deserialization_path'] ?? null,
                 true
             );
@@ -86,7 +85,7 @@ final class MoneyNormalizer implements Normalizer, Denormalizer
             throw NotNormalizableValueException::createForUnexpectedDataType(
                 $e->getMessage(),
                 $data,
-                [Type::BUILTIN_TYPE_FLOAT],
+                ['float'],
                 $context['deserialization_path'] ?? null,
                 true
             );

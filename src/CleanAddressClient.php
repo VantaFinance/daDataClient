@@ -4,7 +4,7 @@
  * DaData Client
  *
  * @author Denis Khodakovskiy <d.khodakovskii@pos-credit.ru>
- * @copyright Copyright (c) 2023, The Vanta
+ * @copyright Copyright (c) 2026, The Vanta
  */
 
 declare(strict_types=1);

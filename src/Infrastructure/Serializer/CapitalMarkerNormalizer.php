@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Vanta\Integration\DaData\Infrastructure\Serializer;
 
-use Symfony\Component\PropertyInfo\Type;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface as Denormalizer;
 use Vanta\Integration\DaData\Response\CapitalMarker;
@@ -45,7 +44,7 @@ final class CapitalMarkerNormalizer implements Denormalizer
             throw NotNormalizableValueException::createForUnexpectedDataType(
                 sprintf('Ожидали строку, получили: %s.', get_debug_type($data)),
                 $data,
-                [Type::BUILTIN_TYPE_STRING],
+                ['string'],
                 $context['deserialization_path'] ?? null,
                 true
             );
@@ -55,7 +54,7 @@ final class CapitalMarkerNormalizer implements Denormalizer
             throw NotNormalizableValueException::createForUnexpectedDataType(
                 'Ожидали число в виде строки',
                 $data,
-                [Type::BUILTIN_TYPE_STRING],
+                ['string'],
                 $context['deserialization_path'] ?? null,
                 true
             );
@@ -67,7 +66,7 @@ final class CapitalMarkerNormalizer implements Denormalizer
             throw NotNormalizableValueException::createForUnexpectedDataType(
                 $e->getMessage(),
                 $data,
-                [Type::BUILTIN_TYPE_STRING],
+                ['string'],
                 $context['deserialization_path'] ?? null,
                 true
             );
