@@ -201,7 +201,7 @@ final class PollyfillPhpStanExtractor implements PropertyTypeExtractorInterface,
 
     private function filterDocBlockParams(PhpDocNode $docNode, string $allowedParam): ?ParamTagValueNode
     {
-        $tags = array_values(array_filter($docNode->getTagsByName('@param'), fn ($tagNode) => $tagNode instanceof PhpDocTagNode && ('$' . $allowedParam) === $tagNode->value->parameterName));
+        $tags = array_values(array_filter($docNode->getTagsByName('@param'), static fn ($tagNode) => $tagNode instanceof PhpDocTagNode && ('$' . $allowedParam) === $tagNode->value->parameterName));
 
         if (!$tags) {
             return null;
