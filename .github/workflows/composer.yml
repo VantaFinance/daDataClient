@@ -45,6 +45,7 @@ jobs:
           php-version: ${{ matrix.data.php }}
           tools: composer:v2, flex
           coverage: none
+      - run: jq '.replace["symfony/http-foundation"]="*"' composer.json > composer.tmp && mv composer.tmp composer.json
 
       - name: Install Dependence and audit
         env:
