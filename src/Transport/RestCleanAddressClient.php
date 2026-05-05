@@ -33,7 +33,8 @@ final class RestCleanAddressClient implements CleanAddressClient
     }
 
     /**
-     * @return array<Address>
+     * @return list<Address>
+     *
      * @throws ExceptionInterface
      * @throws ClientExceptionInterface
      */
@@ -48,6 +49,9 @@ final class RestCleanAddressClient implements CleanAddressClient
 
         $content = $this->client->sendRequest($request)->getBody()->__toString();
 
-        return $this->serializer->deserialize($content, Address::class . '[]', 'json');
+        /** @var list<Address> $results */
+        $results = $this->serializer->deserialize($content, Address::class . '[]', 'json');
+
+        return $results;
     }
 }
