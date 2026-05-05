@@ -54,7 +54,8 @@
             "php-http/discovery": true
         },
         "audit": {
-            "abandoned": "ignore"
+            "abandoned": "ignore",
+            "block-insecure": false
         }
     }
 }
