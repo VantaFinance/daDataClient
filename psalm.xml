@@ -17,7 +17,6 @@
         </ignoreFiles>
     </projectFiles>
     <plugins>
-        <pluginClass class="Psalm\SymfonyPsalmPlugin\Plugin"/>
     </plugins>
 
     <issueHandlers>
