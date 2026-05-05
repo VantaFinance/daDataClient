@@ -39,12 +39,15 @@ use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\Middleware;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\PipelineMiddleware;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\UrlMiddleware;
 use Vanta\Integration\DaData\Infrastructure\PropertyInfo\Extractor\PollyfillPhpStanExtractor;
+use Vanta\Integration\DaData\Infrastructure\Serializer\CapitalMarkerNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\CountryIsoNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\EnumNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\FiasActualityStateNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\MoneyNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\PhoneNumberNormalizer;
+use Vanta\Integration\DaData\Infrastructure\Serializer\QcGeoNormalizer;
 use Vanta\Integration\DaData\Infrastructure\Serializer\RegionIsoNormalizer;
+use Vanta\Integration\DaData\Transport\RestCleanAddressClient;
 use Vanta\Integration\DaData\Transport\RestCleanFullNameClient;
 use Vanta\Integration\DaData\Transport\RestSuggestAddressClient;
 use Vanta\Integration\DaData\Transport\RestSuggestFullNameClient;
@@ -109,6 +112,8 @@ final class RestClientBuilder
             new FiasActualityStateNormalizer(),
             new MoneyNormalizer(),
             new CountryIsoNormalizer(),
+            new QcGeoNormalizer(),
+            new CapitalMarkerNormalizer(),
             new UnwrappingDenormalizer(),
             new DateTimeNormalizer(),
             new UidNormalizer(),
@@ -223,6 +228,20 @@ final class RestClientBuilder
     public function createSuggestFullNameClient(string $url = 'https://suggestions.dadata.ru'): RestSuggestFullNameClient
     {
         return new RestSuggestFullNameClient(
+            $this->serializer,
+            new HttpClient(
+                new ConfigurationClient($this->apiKey, $this->secretKey, $url),
+                new PipelineMiddleware($this->middlewares, $this->client)
+            )
+        );
+    }
+
+    /**
+     * @param non-empty-string $url
+     */
+    public function createCleanAddressClient(string $url = 'https://cleaner.dadata.ru'): CleanAddressClient
+    {
+        return new RestCleanAddressClient(
             $this->serializer,
             new HttpClient(
                 new ConfigurationClient($this->apiKey, $this->secretKey, $url),
