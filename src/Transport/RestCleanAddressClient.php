@@ -12,7 +12,9 @@ declare(strict_types=1);
 namespace Vanta\Integration\DaData\Transport;
 
 use GuzzleHttp\Psr7\Request;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface as HttpClient;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\SerializerInterface as Serializer;
 use Vanta\Integration\DaData\CleanAddressClient;
 use Vanta\Integration\DaData\Response\Address;
@@ -30,6 +32,11 @@ final class RestCleanAddressClient implements CleanAddressClient
         $this->client     = $client;
     }
 
+    /**
+     * @return array<Address>
+     * @throws ExceptionInterface
+     * @throws ClientExceptionInterface
+     */
     public function clean(string $address): array
     {
         $request = new Request(
@@ -41,7 +48,6 @@ final class RestCleanAddressClient implements CleanAddressClient
 
         $content = $this->client->sendRequest($request)->getBody()->__toString();
 
-        /* @var list<Address> $results */
         return $this->serializer->deserialize($content, Address::class . '[]', 'json');
     }
 }
