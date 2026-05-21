@@ -54,7 +54,11 @@
     },
     "audit": {
       "abandoned": "ignore",
-      "block-insecure": false
+      "block-insecure": false,
+      "ignore":[
+        "CVE-2026-45073",
+        "CVE-2026-45065"
+      ]
     }
   }
 }
