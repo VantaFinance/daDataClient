@@ -54,5 +54,4 @@ jobs:
         with:
           composer-options: --optimize-autoloader
           dependency-versions: "highest"
-      - name: Run Security Audit (Ignoring specific CVEs)
-        run: composer audit --ignore-id CVE-2026-45073 --ignore-id CVE-2026-45065
+      - run: composer audit
