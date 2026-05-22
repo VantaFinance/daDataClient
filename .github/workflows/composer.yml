@@ -67,4 +67,4 @@ jobs:
           dependency-versions: "highest"
       
       - name: Run Security Audit
-        run: composer audit
+        run: composer audit --no-dev
