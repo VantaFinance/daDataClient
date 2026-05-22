@@ -34,12 +34,12 @@
     "symfony/serializer": "^5.3|^6.0|^7.0",
     "symfony/property-access": "^5.3|^6.0|^7.0",
     "phpstan/phpdoc-parser": "^1.0|^2.0",
-    "phpdocumentor/reflection-docblock": "^5.0",
+    "phpdocumentor/reflection-docblock": "^5.0|^6.0",
     "doctrine/annotations": "^1.0|^2.0",
     "moneyphp/money": "^3.0|^4.0",
     "myclabs/php-enum": "^1.8",
     "composer/semver": "^3.3",
-    "brick/phonenumber": "^0.4|^0.5|^0.6"
+    "brick/phonenumber": "^0.4|^0.5|^0.6|^0.7|^0.8"
   },
   "require-dev": {
     "symfony/var-dumper": "^5.3|^6.0|^7.0",
