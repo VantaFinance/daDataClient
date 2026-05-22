@@ -78,7 +78,7 @@ final class PollyfillPhpStanExtractor implements PropertyTypeExtractorInterface,
         $this->accessorPrefixes     = $accessorPrefixes ?? ReflectionExtractor::$defaultAccessorPrefixes;
         $this->arrayMutatorPrefixes = $arrayMutatorPrefixes ?? ReflectionExtractor::$defaultArrayMutatorPrefixes;
 
-        if (class_exists(ParserConfig::class)) { //PhpStan 2.0
+        if (class_exists(ParserConfig::class)) { // PhpStan 2.0
             $config             = new ParserConfig([]);
             $this->lexer        = new Lexer($config);
             $this->phpDocParser = new PhpDocParser(
