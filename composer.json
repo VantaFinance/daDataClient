@@ -54,12 +54,7 @@
     },
     "audit": {
       "abandoned": "ignore",
-      "block-insecure": false,
-      "ignore":{
-        "CVE-2026-45073": "The affected component is not in use.",
-        "CVE-2026-45065": "The affected component is not in use.",
-        "CVE-2025-64500": "The affected component is not in use."
-      }
+      "block-insecure": false
     }
   }
 }
