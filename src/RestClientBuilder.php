@@ -98,12 +98,12 @@ final class RestClientBuilder
         $typeExtractors       = [];
 
         /* @infection-ignore-all */
-        if (isOldPackage('symfony/property-info', '7.1.7')) {
+        if (isOldPackage('symfony/property-info', '7.1.8')) {
             $typeExtractors[] = new PollyfillPhpStanExtractor();
         }
 
         /* @infection-ignore-all */
-        if (!isOldPackage('symfony/property-info', '7.1.7')) {
+        if (!isOldPackage('symfony/property-info', '7.1.8')) {
             $typeExtractors[] = new PhpStanExtractor();
         }
 
