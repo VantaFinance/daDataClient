@@ -23,6 +23,7 @@ use PHPStan\PhpDocParser\Parser\ConstExprParser;
 use PHPStan\PhpDocParser\Parser\PhpDocParser;
 use PHPStan\PhpDocParser\Parser\TokenIterator;
 use PHPStan\PhpDocParser\Parser\TypeParser;
+use PHPStan\PhpDocParser\ParserConfig;
 use Symfony\Component\PropertyInfo\Extractor\ConstructorArgumentTypeExtractorInterface;
 use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
 use Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface;
@@ -77,8 +78,18 @@ final class PollyfillPhpStanExtractor implements PropertyTypeExtractorInterface,
         $this->accessorPrefixes     = $accessorPrefixes ?? ReflectionExtractor::$defaultAccessorPrefixes;
         $this->arrayMutatorPrefixes = $arrayMutatorPrefixes ?? ReflectionExtractor::$defaultArrayMutatorPrefixes;
 
-        $this->phpDocParser     = new PhpDocParser(new TypeParser(new ConstExprParser()), new ConstExprParser());
-        $this->lexer            = new Lexer();
+        if (class_exists(ParserConfig::class)) { // PhpStan 2.0
+            $config             = new ParserConfig([]);
+            $this->lexer        = new Lexer($config);
+            $this->phpDocParser = new PhpDocParser(
+                $config,
+                new TypeParser($config, new ConstExprParser($config)),
+                new ConstExprParser($config)
+            );
+        } else {
+            $this->lexer        = new Lexer();
+            $this->phpDocParser = new PhpDocParser(new TypeParser(new ConstExprParser()), new ConstExprParser());
+        }
         $this->nameScopeFactory = new NameScopeFactory();
     }
 
