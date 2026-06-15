@@ -16,8 +16,11 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 final class ForbiddenException extends DaDataException
 {
-    public static function create(Response $response, Request $request): self
+    /**
+     * @param non-empty-string $source
+     */
+    public static function create(Response $response, Request $request, string $source): self
     {
-        return new self($response, $request, 'Forbidden');
+        return new self($response, $request, $source, 'Forbidden');
     }
 }

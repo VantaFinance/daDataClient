@@ -17,7 +17,7 @@ use Vanta\Integration\DaData\Infrastructure\HttpClient\ConfigurationClient;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Exception\InternalServerErrorException;
 use Yiisoft\Http\Status;
 
-final class InternalServerMiddleware implements Middleware
+final class InternalServerMiddleware extends SourceAwareMiddleware
 {
     public function process(Request $request, ConfigurationClient $configuration, callable $next): Response
     {
@@ -28,6 +28,6 @@ final class InternalServerMiddleware implements Middleware
             return $response;
         }
 
-        throw InternalServerErrorException::create($response, $request);
+        throw InternalServerErrorException::create($response, $request, $this->source);
     }
 }

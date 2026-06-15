@@ -16,8 +16,11 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 final class UnauthorizedException extends DaDataException
 {
-    public static function create(Response $response, Request $request): self
+    /**
+     * @param non-empty-string $source
+     */
+    public static function create(Response $response, Request $request, string $source): self
     {
-        return new self($response, $request, 'Unauthorized');
+        return new self($response, $request, $source, 'Unauthorized');
     }
 }
