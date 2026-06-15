@@ -220,6 +220,22 @@ final class RestClientBuilder
     /**
      * @param non-empty-string $url
      */
+    public function createSuggestFullNameClient(string $url = 'https://suggestions.dadata.ru'): RestSuggestFullNameClient
+    {
+        $new = $this->withSource(self::SUGGEST_FULLNAME_CLIENT);
+
+        return new RestSuggestFullNameClient(
+            $new->serializer,
+            new HttpClient(
+                new ConfigurationClient($new->apiKey, $new->secretKey, $url),
+                new PipelineMiddleware($new->middlewares, $new->client)
+            )
+        );
+    }
+
+    /**
+     * @param non-empty-string $url
+     */
     public function createSuggestAddressClient(string $url = 'https://suggestions.dadata.ru'): SuggestAddressClient
     {
         $new = $this->withSource(self::SUGGEST_ADDRESSES_CLIENT);
@@ -241,22 +257,6 @@ final class RestClientBuilder
         $new = $this->withSource(self::SUGGEST_ORGANIZATION_CLIENT);
 
         return new RestSuggestOrganizationClient(
-            $new->serializer,
-            new HttpClient(
-                new ConfigurationClient($new->apiKey, $new->secretKey, $url),
-                new PipelineMiddleware($new->middlewares, $new->client)
-            )
-        );
-    }
-
-    /**
-     * @param non-empty-string $url
-     */
-    public function createSuggestFullNameClient(string $url = 'https://suggestions.dadata.ru'): RestSuggestFullNameClient
-    {
-        $new = $this->withSource(self::SUGGEST_FULLNAME_CLIENT);
-
-        return new RestSuggestFullNameClient(
             $new->serializer,
             new HttpClient(
                 new ConfigurationClient($new->apiKey, $new->secretKey, $url),
