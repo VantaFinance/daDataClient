@@ -26,6 +26,9 @@ abstract class DaDataException extends \Exception implements ClientException
      */
     private string $source;
 
+    /**
+     * @param non-empty-string $source
+     */
     final protected function __construct(
         Response $response,
         Request $request,

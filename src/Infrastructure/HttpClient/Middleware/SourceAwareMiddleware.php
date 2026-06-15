@@ -20,7 +20,7 @@ abstract class SourceAwareMiddleware implements Middleware
     /**
      * @param non-empty-string $source
      */
-    public function __construct(string $source = 'none')
+    final public function __construct(string $source = 'none')
     {
         $this->source = $source;
     }
