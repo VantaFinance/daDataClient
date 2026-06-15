@@ -37,6 +37,7 @@ use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\ClientErrorMid
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\InternalServerMiddleware;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\Middleware;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\PipelineMiddleware;
+use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\SourceAwareMiddleware;
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Middleware\UrlMiddleware;
 use Vanta\Integration\DaData\Infrastructure\PropertyInfo\Extractor\PollyfillPhpStanExtractor;
 use Vanta\Integration\DaData\Infrastructure\Serializer\CapitalMarkerNormalizer;
@@ -145,6 +146,20 @@ final class RestClientBuilder
         return new self($client, $serializer, $apiKey, $secretKey, $middlewares);
     }
 
+    /**
+     * @param non-empty-string $source
+     */
+    private function withSource(string $source): self
+    {
+        return new self(
+            $this->client,
+            $this->serializer,
+            $this->apiKey,
+            $this->secretKey,
+            array_map(static fn (Middleware $m): Middleware => $m instanceof SourceAwareMiddleware ? $m->withSource($source) : $m, $this->middlewares),
+        );
+    }
+
     public function addMiddleware(Middleware $middleware): self
     {
         return new self(
@@ -185,11 +200,13 @@ final class RestClientBuilder
      */
     public function createCleanFullNameClient(string $url = 'https://cleaner.dadata.ru'): CleanFullNameClient
     {
+        $new = $this->withSource('CLEAN-FULLNAME-CLIENT');
+
         return new RestCleanFullNameClient(
-            $this->serializer,
+            $new->serializer,
             new HttpClient(
-                new ConfigurationClient($this->apiKey, $this->secretKey, $url),
-                new PipelineMiddleware($this->middlewares, $this->client)
+                new ConfigurationClient($new->apiKey, $new->secretKey, $url),
+                new PipelineMiddleware($new->middlewares, $new->client)
             )
         );
     }
@@ -199,11 +216,13 @@ final class RestClientBuilder
      */
     public function createSuggestAddressClient(string $url = 'https://suggestions.dadata.ru'): SuggestAddressClient
     {
+        $new = $this->withSource('SUGGEST-ADDRESSES-CLIENT');
+
         return new RestSuggestAddressClient(
-            $this->serializer,
+            $new->serializer,
             new HttpClient(
-                new ConfigurationClient($this->apiKey, $this->secretKey, $url),
-                new PipelineMiddleware($this->middlewares, $this->client)
+                new ConfigurationClient($new->apiKey, $new->secretKey, $url),
+                new PipelineMiddleware($new->middlewares, $new->client)
             )
         );
     }
@@ -213,11 +232,13 @@ final class RestClientBuilder
      */
     public function createSuggestOrganizationClient(string $url = 'https://suggestions.dadata.ru'): SuggestOrganizationClient
     {
+        $new = $this->withSource('SUGGEST-ORGANIZATION-CLIENT');
+
         return new RestSuggestOrganizationClient(
-            $this->serializer,
+            $new->serializer,
             new HttpClient(
-                new ConfigurationClient($this->apiKey, $this->secretKey, $url),
-                new PipelineMiddleware($this->middlewares, $this->client)
+                new ConfigurationClient($new->apiKey, $new->secretKey, $url),
+                new PipelineMiddleware($new->middlewares, $new->client)
             )
         );
     }
@@ -227,11 +248,13 @@ final class RestClientBuilder
      */
     public function createSuggestFullNameClient(string $url = 'https://suggestions.dadata.ru'): RestSuggestFullNameClient
     {
+        $new = $this->withSource('SUGGEST-FULLNAME-CLIENT');
+
         return new RestSuggestFullNameClient(
-            $this->serializer,
+            $new->serializer,
             new HttpClient(
-                new ConfigurationClient($this->apiKey, $this->secretKey, $url),
-                new PipelineMiddleware($this->middlewares, $this->client)
+                new ConfigurationClient($new->apiKey, $new->secretKey, $url),
+                new PipelineMiddleware($new->middlewares, $new->client)
             )
         );
     }
@@ -241,11 +264,13 @@ final class RestClientBuilder
      */
     public function createCleanAddressClient(string $url = 'https://cleaner.dadata.ru'): CleanAddressClient
     {
+        $new = $this->withSource('CLEAN-ADDRESSES-CLIENT');
+
         return new RestCleanAddressClient(
-            $this->serializer,
+            $new->serializer,
             new HttpClient(
-                new ConfigurationClient($this->apiKey, $this->secretKey, $url),
-                new PipelineMiddleware($this->middlewares, $this->client)
+                new ConfigurationClient($new->apiKey, $new->secretKey, $url),
+                new PipelineMiddleware($new->middlewares, $new->client)
             )
         );
     }

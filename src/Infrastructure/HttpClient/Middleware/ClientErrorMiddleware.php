@@ -20,7 +20,7 @@ use Vanta\Integration\DaData\Infrastructure\HttpClient\Exception\NotFoundExcepti
 use Vanta\Integration\DaData\Infrastructure\HttpClient\Exception\UnauthorizedException;
 use Yiisoft\Http\Status;
 
-final class ClientErrorMiddleware implements Middleware
+final class ClientErrorMiddleware extends SourceAwareMiddleware
 {
     public function process(Request $request, ConfigurationClient $configuration, callable $next): Response
     {
@@ -28,19 +28,19 @@ final class ClientErrorMiddleware implements Middleware
         $statusCode = $response->getStatusCode();
 
         if (Status::UNAUTHORIZED == $statusCode) {
-            throw UnauthorizedException::create($response, $request);
+            throw UnauthorizedException::create($response, $request, $this->source);
         }
 
         if (Status::FORBIDDEN == $statusCode) {
-            throw ForbiddenException::create($response, $request);
+            throw ForbiddenException::create($response, $request, $this->source);
         }
 
         if (Status::NOT_FOUND === $statusCode) {
-            throw NotFoundException::create($response, $request);
+            throw NotFoundException::create($response, $request, $this->source);
         }
 
         if ($statusCode >= Status::BAD_REQUEST && $statusCode <= Status::UNAVAILABLE_FOR_LEGAL_REASONS) {
-            throw BadRequestException::create($response, $request);
+            throw BadRequestException::create($response, $request, $this->source);
         }
 
         return $response;

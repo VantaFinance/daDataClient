@@ -21,17 +21,32 @@ abstract class DaDataException extends \Exception implements ClientException
 
     private Request $request;
 
+    /**
+     * @var non-empty-string
+     */
+    private string $source;
+
     final protected function __construct(
         Response $response,
         Request $request,
+        string $source,
         string $message = '',
         int $code = 0,
         ?\Throwable $previous = null
     ) {
         $this->response = $response;
         $this->request  = $request;
+        $this->source   = $source;
 
         parent::__construct($message, $code, $previous);
+    }
+
+    /**
+     * @return non-empty-string
+     */
+    final public function getSource(): string
+    {
+        return $this->source;
     }
 
     final public function getResponse(): Response
