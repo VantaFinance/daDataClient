@@ -58,6 +58,7 @@ final class RestClientBuilder
 {
     public const SUGGEST_ADDRESSES_CLIENT    = 'SUGGEST-ADDRESSES-CLIENT';
     public const SUGGEST_ORGANIZATION_CLIENT = 'SUGGEST-ORGANIZATION-CLIENT';
+    public const SUGGEST_FULLNAME_CLIENT     = 'SUGGEST-FULLNAME-CLIENT';
     public const CLEAN_ADDRESSES_CLIENT      = 'CLEAN-ADDRESSES-CLIENT';
     public const CLEAN_FULLNAME_CLIENT       = 'CLEAN-FULLNAME-CLIENT';
 
@@ -253,7 +254,7 @@ final class RestClientBuilder
      */
     public function createSuggestFullNameClient(string $url = 'https://suggestions.dadata.ru'): RestSuggestFullNameClient
     {
-        $new = $this->withSource(self::CLEAN_ADDRESSES_CLIENT);
+        $new = $this->withSource(self::SUGGEST_FULLNAME_CLIENT);
 
         return new RestSuggestFullNameClient(
             $new->serializer,
