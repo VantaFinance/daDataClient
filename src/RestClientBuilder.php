@@ -269,7 +269,7 @@ final class RestClientBuilder
      */
     public function createCleanAddressClient(string $url = 'https://cleaner.dadata.ru'): CleanAddressClient
     {
-        $new = $this->withSource('CLEAN-ADDRESSES-CLIENT');
+        $new = $this->withSource(self::CLEAN_ADDRESSES_CLIENT);
 
         return new RestCleanAddressClient(
             $new->serializer,
