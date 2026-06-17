@@ -34,7 +34,7 @@ final class SuggestAddress
      */
     public function __construct(Address $data, string $value, string $unrestrictedValue)
     {
-        $this->data              = $data;
+        $this->data              = $data->withResult($value);
         $this->value             = $value;
         $this->unrestrictedValue = $unrestrictedValue;
     }
