@@ -1146,4 +1146,15 @@ final class Address
     {
         return $this->result;
     }
+
+    /**
+     * @param non-empty-string $result
+     */
+    public function withResult(string $result): self
+    {
+        $new         = clone $this;
+        $new->result = $result;
+
+        return $new;
+    }
 }
