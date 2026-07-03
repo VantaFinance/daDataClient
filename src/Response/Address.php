@@ -1157,4 +1157,21 @@ final class Address
 
         return $new;
     }
+
+    /**
+     * @see https://support.dadata.ru/knowledge-bases/4/articles/1071-pochemu-dlya-moskvyi-i-pitera-pole-city-zapolnyaetsya-v-podskazkah-no-ne-v-standartizatsii
+     * @see https://support.dadata.ru/knowledge-bases/4/articles/51578-pole-city-dubliruet-region-ili-area-v-podskazkah-no-ne-v-standartizatsii
+     */
+    public function withNormalizedCity(): self
+    {
+        $new               = clone $this;
+        $new->city         = $this->region;
+        $new->cityType     = $this->regionType;
+        $new->cityTypeFull = $this->regionTypeFull;
+        $new->cityWithType = $this->regionWithType;
+        $new->cityKladrId  = $this->regionKladrId;
+        $new->cityFiasId   = $this->regionFiasId;
+
+        return $new;
+    }
 }
