@@ -1164,13 +1164,25 @@ final class Address
      */
     public function withNormalizedCity(): self
     {
-        $new               = clone $this;
-        $new->city         = $this->region;
-        $new->cityType     = $this->regionType;
-        $new->cityTypeFull = $this->regionTypeFull;
-        $new->cityWithType = $this->regionWithType;
-        $new->cityKladrId  = $this->regionKladrId;
-        $new->cityFiasId   = $this->regionFiasId;
+        $new = clone $this;
+
+        if ('город' == $this->regionTypeFull) {
+            $new->city         = $this->region;
+            $new->cityType     = $this->regionType;
+            $new->cityTypeFull = $this->regionTypeFull;
+            $new->cityWithType = $this->regionWithType;
+            $new->cityKladrId  = $this->regionKladrId;
+            $new->cityFiasId   = $this->regionFiasId;
+        }
+
+        if ('город' == $this->areaTypeFull) {
+            $new->city         = $this->area;
+            $new->cityType     = $this->areaType;
+            $new->cityTypeFull = $this->areaTypeFull;
+            $new->cityWithType = $this->areaWithType;
+            $new->cityKladrId  = $this->areaKladrId;
+            $new->cityFiasId   = $this->areaFiasId;
+        }
 
         return $new;
     }
