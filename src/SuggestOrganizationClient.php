@@ -24,4 +24,14 @@ interface SuggestOrganizationClient
      * @throws ClientException
      */
     public function findByInn(string $inn, int $count = 1): array;
+
+    /**
+     * @param non-empty-string $name
+     * @param int<1, 20>       $count
+     *
+     * @return array<int, SuggestOrganization>
+     *
+     * @throws ClientException
+     */
+    public function findByName(string $name, int $count = 1): array;
 }

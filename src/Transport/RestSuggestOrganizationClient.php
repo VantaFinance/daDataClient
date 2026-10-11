@@ -49,4 +49,23 @@ final class RestSuggestOrganizationClient implements SuggestOrganizationClient
 
         return $value;
     }
+
+    public function findByName(string $name, int $count = 1): array
+    {
+        $request = new Request(
+            Method::POST,
+            '/suggestions/api/4_1/rs/suggest/party',
+            [],
+            $this->serializer->serialize(['query' => $name, 'count' => $count], 'json')
+        );
+
+        $content = $this->client->sendRequest($request)->getBody()->__toString();
+
+        /** @var list<SuggestOrganization> $value */
+        $value = $this->serializer->deserialize($content, SuggestOrganization::class . '[]', 'json', [
+            UnwrappingDenormalizer::UNWRAP_PATH => '[suggestions]',
+        ]);
+
+        return $value;
+    }
 }
